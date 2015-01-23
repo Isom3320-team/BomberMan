@@ -23,10 +23,6 @@ public class GraphicManager extends Application {
 	ImageView imgView = new ImageView(p.getImage());
 	sp.getChildren().add(imgView);
     //
-    Label lbl = new Label("JavaFX 2 StackPane");
-    sp.getChildren().add(lbl);
-    Button btn = new Button("Button");
-    sp.getChildren().add(btn);
    
     //Adding StackPane to the scene
     Scene scene = new Scene(sp,300,200);
