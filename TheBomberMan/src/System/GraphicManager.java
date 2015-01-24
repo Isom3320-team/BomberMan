@@ -1,32 +1,61 @@
 package System;
+
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class GraphicManager extends Application {
-  public static void main(String[] args) {
-    Application.launch(args);
-  }
+import System.GameStatus;
+import control.DownKey;
 
-  @Override
-  public void start(Stage primaryStage) {
-    primaryStage.setTitle("BorderPane Test");
-    
-    Player p = new Player(50, 50);
-    //Creating StackPane
-    StackPane sp = new StackPane();
-	ImageView imgView = new ImageView(p.getImage());
-	sp.getChildren().add(imgView);
-    //
-   
-    //Adding StackPane to the scene
-    Scene scene = new Scene(sp,300,200);
-    primaryStage.setScene(scene);
-    primaryStage.show();
-  }
+public class GraphicManager extends Application {
+	GameStatus gs; 
+	DownKey dk;
+	
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+	
+	
+	@Override
+	  public void start(Stage primaryStage){
+		  
+		gs = new GameStatus();
+		dk = new DownKey(this.gs);
+		
+	    primaryStage.setTitle("BorderPane Test");
+
+	    //Creating Pane
+	    Pane p = new Pane();
+		
+		gs.getPlayer().getView().setOnKeyPressed(e-> {
+			if (e.getCode() == KeyCode.DOWN){
+				gs.getPlayer().moveDown();
+				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
+			}else if(e.getCode() == KeyCode.UP){
+				gs.getPlayer().moveUp();
+				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
+			}
+		});
+		
+		p.getChildren().add(gs.getPlayer().getView());
+		
+	    //Adding StackPane to the scene
+	    Scene scene = new Scene(p,300,200);
+	    primaryStage.setScene(scene);
+	    primaryStage.show();
+	    
+	    gs.getPlayer().getView().requestFocus();
+	    
+	    //t.play();
+	  }
+	
+
 }
+
+
+  

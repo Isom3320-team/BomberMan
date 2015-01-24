@@ -1,10 +1,12 @@
 package System;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public abstract class Units {
 	private int xCoord;
 	private int yCoord;
 	private Image image;
+	private ImageView view;
 	private boolean isDead;
 	
 	public Units(int x, int y) {
@@ -48,6 +50,14 @@ public abstract class Units {
 	
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
+	}
+
+	public ImageView getView() {
+		return view;
+	}
+
+	public void setView(ImageView view) {
+		this.view = view;
 	}
 }
 
