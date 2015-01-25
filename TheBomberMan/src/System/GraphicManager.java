@@ -36,10 +36,23 @@ public class GraphicManager extends Application {
 			if (e.getCode() == KeyCode.DOWN){
 				gs.getPlayer().moveDown();
 				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
-			}else if(e.getCode() == KeyCode.UP){
+			}
+			if(e.getCode() == KeyCode.UP){
 				gs.getPlayer().moveUp();
 				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
 			}
+			if(e.getCode() == KeyCode.LEFT){
+				gs.getPlayer().moveLeft();
+				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
+			}
+			if(e.getCode() == KeyCode.RIGHT){
+				gs.getPlayer().moveRight();
+				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
+			}
+			else{
+				
+			}
+			
 		});
 		
 		p.getChildren().add(gs.getPlayer().getView());
