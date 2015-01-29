@@ -1,5 +1,16 @@
 package System;
 
-public class Wall {
+public class Wall extends NonLivingObj implements Killable {
+
+	public Wall(int x, int y) {
+		super(x, y);
+		
+	}
+
+	@Override
+	public void die() {
+		
+	}
+	
 
 }

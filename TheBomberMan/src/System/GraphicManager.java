@@ -49,6 +49,12 @@ public class GraphicManager extends Application {
 				gs.getPlayer().moveRight();
 				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
 			}
+			if(e.getCode() == KeyCode.SPACE){
+				Bomb bomb = gs.newBomb();
+				p.getChildren().add(bomb.getView());
+				gs.getBomb().getView().setLayoutX(gs.getPlayer().getX());
+				gs.getBomb().getView().setLayoutY(gs.getPlayer().getY());
+			}
 			else{
 				
 			}
@@ -56,7 +62,6 @@ public class GraphicManager extends Application {
 		});
 		
 		p.getChildren().add(gs.getPlayer().getView());
-		
 	    //Adding StackPane to the scene
 	    Scene scene = new Scene(p,300,200);
 	    primaryStage.setScene(scene);

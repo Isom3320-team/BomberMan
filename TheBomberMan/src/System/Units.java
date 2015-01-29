@@ -59,5 +59,9 @@ public abstract class Units {
 	public void setView(ImageView view) {
 		this.view = view;
 	}
+	public void setView(){
+		ImageView iv = new ImageView(this.getImage());
+		this.view = iv ;
+	}
 }
 
