@@ -9,7 +9,7 @@ public class Wall extends NonLivingObj implements Killable {
 
 	@Override
 	public void die() {
-		
+		this.setDead(true);
 	}
 	
 

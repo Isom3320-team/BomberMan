@@ -1,10 +1,15 @@
 package System;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import System.Item.ItemType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Player extends LivingObj{
-	int score, level, lives,maxBomb, bombRadius;
-	boolean godmode; 
+	private int score, level, lives,maxBomb, bombRadius, blastRadius,speed;
+	private boolean godmode, isAlive; 
+	private String name;
 	public Player(int x, int y) {
 		super(x, y);
 		
@@ -13,8 +18,13 @@ public class Player extends LivingObj{
 		ImageView view = new ImageView();
 		view.setImage(image);
 		this.setView(view);
-
-		// TODO Auto-generated constructor stub		
+		lives = 3;
+		maxBomb = 1;
+		blastRadius = 2;
+		level = 1;
+		isAlive = true;
+		godmode = false;
+		name = "Default Name ";// to do: prompt the use to input the name;
 	}
 	public int giveLive(){
 		return lives;
@@ -54,6 +64,13 @@ public class Player extends LivingObj{
 	
 	public void consume(Item item){
 		// to do: get the Item type and add attributes to the player
+		if(item.gettype() == ItemType.BLAST){
+			this.blastRadius+=5;// to decide how much to increase 
+		}else if (item.gettype() == ItemType.BOMB){
+			this.maxBomb++;
+		}else{
+			this.speed+=4;// to decide how much to increase
+		}
 	}
 	
 	public int getLevel(){
@@ -73,7 +90,20 @@ public class Player extends LivingObj{
 	}
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-		
+		if (!godmode) {
+			this.setDead(true);
+			setCoordinates(32, 32);
+			this.lives--;
+			this.maxBomb = 1;
+			this.blastRadius = 2;
+			this.godmode = true;
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask(){
+				public void run(){
+					godmode = false;
+				}
+			}, 1000);
+		}
+		// to do: commit the score to the GameEngine;
 	}
 }
