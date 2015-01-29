@@ -1,6 +1,6 @@
 package System;
 
-public abstract class LivingObj extends Units {
+public abstract class LivingObj extends Units implements Killable,Movable{
 
 	private final int moveInc = 32;
 	
@@ -24,4 +24,5 @@ public abstract class LivingObj extends Units {
 	public void moveRight(){
 		setX(getX() + moveInc);
 	}
+	
 }
