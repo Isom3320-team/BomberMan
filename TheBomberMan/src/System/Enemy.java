@@ -9,7 +9,7 @@ public class Enemy extends LivingObj {
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
+		setDead(true);
 		
 	}
 	
