@@ -8,11 +8,14 @@ public abstract class Units {
 	private Image image;
 	private ImageView view;
 	private boolean isDead;
+	public unitsArray = new ArrayList<Units>();
+	
 	
 	public Units(int x, int y) {
 		this.xCoord = x;
 		this.yCoord = y;
 		this.isDead = false;
+		unitsArray.add();
 	}
 	
 	public int getX() {
@@ -62,6 +65,11 @@ public abstract class Units {
 	public void setView(){
 		ImageView iv = new ImageView(this.getImage());
 		this.view = iv ;
+	}
+
+	public static ArrayList<Units> getUnitsArray() {
+		
+		return 
 	}
 }
 
