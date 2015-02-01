@@ -1,5 +1,16 @@
 package System;
 
+import java.util.ArrayList;
+
+import system.Bomb;
+import system.Difficulty;
+import system.Enemy;
+import system.Explosion;
+import system.HardBlock;
+import system.Player;
+import system.Powerup;
+import system.SoftBlock;
+
 public abstract class  PhysicsManager implements Runnable{
 	static int increment;
 		@Override
@@ -26,4 +37,13 @@ public abstract class  PhysicsManager implements Runnable{
 						return false;
 				}
 		}
+
+		private ArrayList<Player> playerArray = new ArrayList<Player>();
+		private ArrayList<Wall> wallArray= new ArrayList<Wall>();
+		private ArrayList<Rock> rockArray= new ArrayList<Rock>();
+		private ArrayList<Enemy> enemyArray= new ArrayList<Enemy>();
+		private ArrayList<Bomb> bombArray= new ArrayList<Bomb>();
+		private ArrayList<Minion> minionArray= new ArrayList<Minion>();
+		private ArrayList<Item> itemArray= new ArrayList<Item>();
+		
 }

@@ -1,7 +1,9 @@
 package System;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import system.Player;
 import System.Item.ItemType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +12,8 @@ public class Player extends LivingObj{
 	private int score, level, lives,maxBomb, bombRadius, blastRadius,speed;
 	private boolean godmode, isAlive; 
 	private String name;
+	private ArrayList<Player> playerArray;
+	private boolean isActivePlayer;
 	public Player(int x, int y) {
 		super(x, y);
 		
@@ -25,6 +29,8 @@ public class Player extends LivingObj{
 		isAlive = true;
 		godmode = false;
 		name = "Default Name ";// to do: prompt the use to input the name;
+		playerArray = new ArrayList<Player>();
+		isActivePlayer = true;
 	}
 	public int giveLive(){
 		return lives;
@@ -105,5 +111,41 @@ public class Player extends LivingObj{
 			}, 1000);
 		}
 		// to do: commit the score to the GameEngine;
+	}
+	
+	public void addPlayer(Player x) {
+		playerArray.add(x);
+	}
+	public void removePlayer(int number) {
+		playerArray.remove(number);
+	}
+	public ArrayList<Player> getPlayerArray() {
+		return playerArray;
+	}
+	public Player getActivePlayer() {
+
+		if (playerArray.get(1).isActivePlayer()) {
+			return playerArray.get(1);
+		} else {
+			return playerArray.get(0);
+		}
+	}
+	public boolean isActivePlayer() {
+		return isActivePlayer;
+	}
+	public void setActivePlayer(boolean isActivePlayer) {
+		this.isActivePlayer = isActivePlayer;
+	}
+	public void switchActivePlayers() {
+		if (playerArray.size() == 2) {
+
+			if (playerArray.get(0).isActivePlayer()) {
+				playerArray.get(0).setActivePlayer(false);
+				playerArray.get(1).setActivePlayer(true);
+			} else {
+				playerArray.get(0).setActivePlayer(true);
+				playerArray.get(1).setActivePlayer(false);
+			}
+		}
 	}
 }
