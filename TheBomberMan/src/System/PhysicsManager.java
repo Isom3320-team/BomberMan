@@ -38,6 +38,11 @@ public abstract class  PhysicsManager implements Runnable{
 				}
 		}
 
+		private ArrayList<Player> playerArray = new ArrayList<Player>();
+		private ArrayList<Wall> wallArray= new ArrayList<Wall>();
+		private ArrayList<Rock> rockArray= new ArrayList<Rock>();
+		private ArrayList<Enemy> enemyArray= new ArrayList<Enemy>();
+		private ArrayList<Bomb> bombArray= new ArrayList<Bomb>();
 		private ArrayList<Minion> minionArray= new ArrayList<Minion>();
 		private ArrayList<Item> itemArray= new ArrayList<Item>();
 		

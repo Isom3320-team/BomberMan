@@ -12,7 +12,7 @@ public class Player extends LivingObj{
 	private int score, level, lives,maxBomb, bombRadius, blastRadius,speed;
 	private boolean godmode, isAlive; 
 	private String name;
-	public static ArrayList<Player> playerArray;
+	private ArrayList<Player> playerArray;
 	private boolean isActivePlayer;
 	public Player(int x, int y) {
 		super(x, y);
@@ -122,7 +122,7 @@ public class Player extends LivingObj{
 	public ArrayList<Player> getPlayerArray() {
 		return playerArray;
 	}
-	public static Player getActivePlayer() {
+	public Player getActivePlayer() {
 
 		if (playerArray.get(1).isActivePlayer()) {
 			return playerArray.get(1);
