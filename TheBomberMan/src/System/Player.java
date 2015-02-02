@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Player extends LivingObj{
-	private int score, level, lives,maxBomb, bombRadius, blastRadius,speed;
+	private int score, level, lives,maxBomb, bombRadius, blastRadius, speed; //What are these unused variables?
 	private boolean godmode, isAlive; 
 	private String name;
 	private boolean isActivePlayer;

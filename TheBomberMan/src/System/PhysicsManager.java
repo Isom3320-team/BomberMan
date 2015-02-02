@@ -55,11 +55,13 @@ public abstract class  PhysicsManager implements Runnable{
 				}
 			}
 			
+		if (!(unit1 instanceof Bomb)) {
 			for (int i = 0; i < game.getBombArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getBombArray().get(i))) {
 					return false;
 				}
-		}
+			}
+		}	
 		return true;
 		
 	}
@@ -111,29 +113,30 @@ public abstract class  PhysicsManager implements Runnable{
 				return false;
 			}
 		 
-		/* public void explodeBomb(int index) {
+		 public void explodeBomb(int bombX) {
 
 				boolean canExpUp = true;
 				boolean canExpDown = true;
 				boolean canExpLeft = true;
 				boolean canExpRight = true;
-				int playerBlastRadius = 2;
-				int bossBlastRadius = 2;
+				int playerBlastRadius = 2; //bombX.ItemType ??? + set ItemType --> Range of the blast
+				int bossBlastRadius = 2; //bombX.Type ???
 
-				if (!gs.gameOver) {
-					playerBlastRadius = gs.getActivePlayer().getBlastRadius();
-					bossBlastRadius = (gs.getActivePlayer().getLevel() / 2) + 2;
-				}
 
-				// adds explosion outwards
-				for (int i = 0; i < (gs.getBombs().get(index).isBossBomb() ? bossBlastRadius
+				// adds explosion outwards 
+				for (int i = 0; i < (game.getBombArray().get(bombX).getbossBomb() ? bossBlastRadius
 						: playerBlastRadius); i++) {
 
 					// up
-					Explosion u = new Explosion(gs.getBombs().get(index).getxPos(), gs
-							.getBombs().get(index).getyPos()
-							- i * gs.yInc);
-
+					Explosion up = new Explosion(game.getBombArray().get(bombX).getX(),
+							 game.getBombArray().get(bombX).getY()); 
+							// - i * game.yInc (yInc = 32) needed?
+							
+			/*	do
+					if canMove(game.getBombArray().get(bombX).getX()+increment)
+						Explosion
+				while */
+					
 					if (canExpUp) {
 						if (gs.getBombs().get(index).isBossBomb()) {
 							u.setBossExplosion(true);
@@ -194,6 +197,6 @@ public abstract class  PhysicsManager implements Runnable{
 				}
 
 				gs.removeBomb(index);
-			}	*/
+			}	
 		 
 }
