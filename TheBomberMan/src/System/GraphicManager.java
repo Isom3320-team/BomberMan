@@ -12,13 +12,10 @@ import javafx.stage.Stage;
 import System.GameStatus;
 import control.DownKey;
 
-public class GraphicManager extends Application {
+public class GraphicManager extends Application implements Runnable {
 	GameStatus gs; 
 	DownKey dk;
-	
-	public static void main(String[] args) {
-		Application.launch(args);
-	}
+	Stage primayStage;
 	
 	
 	@Override
@@ -50,7 +47,8 @@ public class GraphicManager extends Application {
 				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
 			}
 			if(e.getCode() == KeyCode.SPACE){
-				Bomb bomb = gs.newBomb();
+				gs.addBomb();
+				Bomb bomb = gs.getBomb();
 				p.getChildren().add(bomb.getView());
 				gs.getBomb().getView().setLayoutX(gs.getPlayer().getX());
 				gs.getBomb().getView().setLayoutY(gs.getPlayer().getY());
@@ -60,6 +58,11 @@ public class GraphicManager extends Application {
 			}
 			
 		});
+		if (gs.getBomb()!=null)
+		{
+			System.out.print("bomb dead");
+			p.getChildren().remove(gs.getBomb().getView());
+		}
 		
 		p.getChildren().add(gs.getPlayer().getView());
 	    //Adding StackPane to the scene
@@ -71,6 +74,14 @@ public class GraphicManager extends Application {
 	    
 	    //t.play();
 	  }
+
+
+
+	@Override
+	public void run() {
+		start(primayStage);
+		
+	}
 	
 
 }

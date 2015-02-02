@@ -2,8 +2,6 @@ package System;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import system.Player;
 import System.Item.ItemType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +10,6 @@ public class Player extends LivingObj{
 	private int score, level, lives,maxBomb, bombRadius, blastRadius,speed;
 	private boolean godmode, isAlive; 
 	private String name;
-	private ArrayList<Player> playerArray;
 	private boolean isActivePlayer;
 	public Player(int x, int y) {
 		super(x, y);
@@ -29,7 +26,6 @@ public class Player extends LivingObj{
 		isAlive = true;
 		godmode = false;
 		name = "Default Name ";// to do: prompt the use to input the name;
-		playerArray = new ArrayList<Player>();
 		isActivePlayer = true;
 	}
 	public int giveLive(){
@@ -112,7 +108,7 @@ public class Player extends LivingObj{
 		}
 		// to do: commit the score to the GameEngine;
 	}
-	
+/*	
 	public void addPlayer(Player x) {
 		playerArray.add(x);
 	}
@@ -147,5 +143,5 @@ public class Player extends LivingObj{
 				playerArray.get(1).setActivePlayer(false);
 			}
 		}
-	}
+	}*/
 }
