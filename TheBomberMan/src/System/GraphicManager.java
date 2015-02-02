@@ -12,17 +12,14 @@ import javafx.stage.Stage;
 import System.GameStatus;
 import control.DownKey;
 
-public class GraphicManager extends Application implements Runnable {
+public class GraphicManager extends Application implements Runnable{
 	GameStatus gs; 
-	DownKey dk;
 	Stage primayStage;
-	
 	
 	@Override
 	  public void start(Stage primaryStage){
 		  
 		gs = new GameStatus();
-		dk = new DownKey(this.gs);
 		
 	    primaryStage.setTitle("BorderPane Test");
 
@@ -30,31 +27,33 @@ public class GraphicManager extends Application implements Runnable {
 	    Pane p = new Pane();
 		
 		gs.getPlayer().getView().setOnKeyPressed(e-> {
-			if (e.getCode() == KeyCode.DOWN){
-				gs.getPlayer().moveDown();
-				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
-			}
-			if(e.getCode() == KeyCode.UP){
+			switch (e.getCode()) {
+			case UP:
 				gs.getPlayer().moveUp();
 				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
-			}
-			if(e.getCode() == KeyCode.LEFT){
+				break;
+			case DOWN:
+				gs.getPlayer().moveDown();
+				gs.getPlayer().getView().setLayoutY(gs.getPlayer().getY());
+				break;
+			case LEFT:
 				gs.getPlayer().moveLeft();
 				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
-			}
-			if(e.getCode() == KeyCode.RIGHT){
+				break;
+			case RIGHT:
 				gs.getPlayer().moveRight();
 				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
-			}
-			if(e.getCode() == KeyCode.SPACE){
+				break;
+			case SPACE:
 				gs.addBomb();
 				Bomb bomb = gs.getBomb();
 				p.getChildren().add(bomb.getView());
 				gs.getBomb().getView().setLayoutX(gs.getPlayer().getX());
 				gs.getBomb().getView().setLayoutY(gs.getPlayer().getY());
-			}
-			else{
-				
+			case ESCAPE:
+				break;
+			default:
+				break;
 			}
 			
 		});
@@ -79,7 +78,7 @@ public class GraphicManager extends Application implements Runnable {
 
 	@Override
 	public void run() {
-		start(primayStage);
+		Application.launch();
 		
 	}
 	
