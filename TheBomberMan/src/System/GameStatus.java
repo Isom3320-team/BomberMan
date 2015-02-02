@@ -10,7 +10,7 @@ public class GameStatus {
 	private ArrayList<Wall> wallArray= new ArrayList<Wall>();
 	private ArrayList<Rock> rockArray= new ArrayList<Rock>();
 	private ArrayList<Enemy> enemyArray= new ArrayList<Enemy>();
-	private ArrayList<Bomb> bombArray= new ArrayList<Bomb>();
+	ArrayList<Bomb> bombArray= new ArrayList<Bomb>();
 	private ArrayList<Minion> minionArray= new ArrayList<Minion>();
 	private ArrayList<Item> itemArray= new ArrayList<Item>();
 	
@@ -32,5 +32,10 @@ public class GameStatus {
 	public void addBomb(){
 		bomb = new Bomb(player.getX() ,player.getY());
 		bombArray.add(bomb);
+	}
+	public void removeBomb(){
+		if(bombArray.size()!=0){
+		bombArray.remove(0);
+		}
 	}
 }

@@ -45,9 +45,16 @@ public class GraphicManager extends Application implements Runnable{
 				gs.getPlayer().getView().setLayoutX(gs.getPlayer().getX());
 				break;
 			case SPACE:
-				gs.addBomb();
-				Bomb bomb = gs.getBomb();
-				p.getChildren().add(bomb.getView());
+				if (gs.getBomb()!=null){
+					int l = gs.bombArray.size();
+					p.getChildren().remove(gs.getBomb().getView());
+					System.out.print(gs.bombArray.size());
+					gs.removeBomb();
+					gs.addBomb();
+				}else{
+					gs.addBomb();
+				}
+				p.getChildren().add(gs.getBomb().getView());
 				gs.getBomb().getView().setLayoutX(gs.getPlayer().getX());
 				gs.getBomb().getView().setLayoutY(gs.getPlayer().getY());
 			case ESCAPE:
@@ -57,11 +64,6 @@ public class GraphicManager extends Application implements Runnable{
 			}
 			
 		});
-		if (gs.getBomb()!=null)
-		{
-			System.out.print("bomb dead");
-			p.getChildren().remove(gs.getBomb().getView());
-		}
 		
 		p.getChildren().add(gs.getPlayer().getView());
 	    //Adding StackPane to the scene
