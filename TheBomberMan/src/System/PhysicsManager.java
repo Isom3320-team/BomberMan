@@ -2,6 +2,8 @@ package System;
 
 import java.util.ArrayList;
 
+import system.Ghost;
+import system.LivingUnit;
 import System.Bomb;
 import System.Difficulty;
 import System.Enemy;
@@ -13,6 +15,7 @@ import System.Wall;
 
 public abstract class  PhysicsManager implements Runnable{
 	static int increment;
+	static GameStatus gs;
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
@@ -31,19 +34,66 @@ public abstract class  PhysicsManager implements Runnable{
 				return false;
 		}
 		
-		/*public static boolean canMove(Units unit1) {
-			for(int i=0; i < Units.getUnitsArray().size(); i++) {
-				if (CollisionDetector(unit1, Units.getUnitsArray().get(i)))
+		public static boolean canMove(Units unit1) {
+			
+			for(int i=0; i < gs.getWallArray().size(); i++) {
+				if (CollisionDetector(unit1, gs.getWallArray().get(i)))
 						return false;
 				}
-		}*/
-
-		private ArrayList<Player> playerArray = new ArrayList<Player>();
-		private ArrayList<Wall> wallArray= new ArrayList<Wall>();
-		private ArrayList<Rock> rockArray= new ArrayList<Rock>();
-		private ArrayList<Enemy> enemyArray= new ArrayList<Enemy>();
-		private ArrayList<Bomb> bombArray= new ArrayList<Bomb>();
-		private ArrayList<Minion> minionArray= new ArrayList<Minion>();
-		private ArrayList<Item> itemArray= new ArrayList<Item>();
+			
+			for(int i=0; i < gs.getRockArray().size(); i++) {
+				if (CollisionDetector(unit1, gs.getRockArray().get(i)))
+						return false;
+				}
+			
+			if (unit1 instanceof Enemy) {
+			for(int i=0; i < gs.getEnemyArray().size(); i++) {
+				if (CollisionDetector(unit1, gs.getEnemyArray().get(i)))
+						return false;
+				}
+			}
+			
+			for (int i = 0; i < gs.getBombArray().size(); i++) {
+				if (CollisionDetector(unit1, gs.getBombArray().get(i))) {
+					return false;
+				}
+		}
+		return true;
 		
+	}
+		
+		/* public boolean canPlaceBomb(Player player) {
+			for (int i = 0; i < gs.getHardBlocks().size(); i++) {
+				if (collidesWith(p, gs.getHardBlocks().get(i),
+						CollisionType.OVERLAP)) {
+					return false;
+				}
+			}
+
+			for (int i = 0; i < gs.getSoftBlocks().size(); i++) {
+				if (collidesWith(p, gs.getSoftBlocks().get(i),
+						CollisionType.OVERLAP)) {
+					return false;
+				}
+			}
+
+			for (int i = 0; i < gs.getBombs().size(); i++) {
+				if (collidesWith(p, gs.getBombs().get(i), CollisionType.OVERLAP)) {
+					return false;
+				}
+			}
+
+			int counter = 0;
+
+			for (int i = 0; i < gs.getBombs().size(); i++) {
+				if (!gs.getBombs().get(i).isBossBomb()) {
+					counter++;
+				}
+			}
+			if (p.getMaxBombs() == counter) {
+				return false;
+			}
+
+			return true;
+		} */
 }
