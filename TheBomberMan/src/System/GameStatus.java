@@ -42,7 +42,7 @@ public class GameStatus {
 		}
 	}
 	public ArrayList<Bomb> getBombArray() {
-		return bombArray; // I need the complete array for Physics Manager
+		return bombArray; // Can be used either for Boss AND Player
 	}
 	
 	public ArrayList<Wall> getWallArray() {
