@@ -1,6 +1,7 @@
 package System;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import System.CollisionType;
 import System.Ghost;
@@ -16,7 +17,7 @@ import System.Item;
 import System.Wall;
 
 public  class  PhysicsManager implements Runnable{
-	static  int increment;
+	static  int inc;
 	static GameStatus game;
 	
 	public PhysicsManager(GameStatus game){ 
@@ -29,19 +30,41 @@ public  class  PhysicsManager implements Runnable{
 			}
 		// to do : in the detector we need to use switch to distinguish different type of collision
 		// this is useful and can save time
-	public static boolean CollisionDetector(Units unit1, Units unit2,CollisionType type) {
+public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType type) {
 			
-			if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() + increment)
-				return true;
-			else if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() + increment)
-				return true;
-			else if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() - increment)
-				return true;
-			else if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() - increment)
-				return true;
-			else
-				return false;
+			if (type == CollisionType.UP) {
+				if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() - inc){
+					return true;
+				}
+			}
+			
+			if (type == CollisionType.DOWN) {	
+				if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() + inc){
+					return true;
+				}
+			}
+			
+			if (type == CollisionType.RIGHT) {
+				if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() + inc){
+					return true;
+				}
+			}
+			
+			if (type == CollisionType.LEFT) {
+				if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() - inc){
+					return true;
+				}
+			}
+			
+			if (type == CollisionType.OVERLAP) {
+				if (unit1.getX() == unit2.getY() && unit1.getY() == unit2.getY()){
+					return true;
+				}
+			}
+			
+			return false;
 		}
+
 		
 	public static boolean canMove(Units unit1, CollisionType type) {
 			
@@ -119,13 +142,99 @@ public  class  PhysicsManager implements Runnable{
 				}
 				return false;
 			}
-		 
+	public boolean hitsPlayer(Enemy enemy) {
+
+		if (CollisionDetector(enemy, game.getPlayer(), CollisionType.OVERLAP)) {
+			return true;
+		}
+
+		return false;
+	}
+	public void ItemPickUp() {
+		for (int i = 0; i < game.getItemArray().size(); i++) {
+			if (CollisionDetector(game.getPlayer(), game.getItemArray().get(i),
+					CollisionType.OVERLAP)) {
+				game.getPlayer().consume(game.getItemArray().get(i));
+				game.removeItem(i);
+			}
+		}
+	}
+	public void ExplosionDetector() {
+		for (int i = 0; i < game.getExplosionArray().size(); i++) {
+			for (int j = 0; j < game.getWallArray().size(); j++) {
+				if (CollisionDetector(game.getExplosionArray().get(i), game.getWallArray()
+						.get(j), CollisionType.OVERLAP)) {
+					game.getWallArray().get(j).die();
+				}
+			}
+
+			for (int j = 0; j < game.getEnemyArray().size(); j++) {
+				if (CollisionDetector(game.getExplosionArray().get(i), game
+								.getEnemyArray().get(j), CollisionType.OVERLAP)) {
+					game.getEnemyArray().get(j).die();
+				}
+			}
+
+
+			if (CollisionDetector(game.getExplosionArray().get(i), game.getPlayer(), CollisionType.OVERLAP)) {
+				game.getPlayer().die();
+			}
+			
+		}
+	}
+	public void enemyRandomWalk(Enemy en) {
+		ArrayList<CollisionType> options = new ArrayList<CollisionType>();
+
+		if (canMove(en, CollisionType.UP)) {
+			options.add(CollisionType.UP);
+		}
+
+		if (canMove(en, CollisionType.DOWN)) {
+			options.add(CollisionType.DOWN);
+		}
+
+		if (canMove(en, CollisionType.LEFT)) {
+			options.add(CollisionType.LEFT);
+		}
+
+		if (canMove(en, CollisionType.RIGHT)) {
+			options.add(CollisionType.RIGHT);
+		}
+
+		// chooses a direction to move in from options
+		if (options.size() > 0) {
+			CollisionType direction = options.get(new Random().nextInt(options.size()));
+			if (direction == CollisionType.UP) {
+				en.moveUp();
+			} else if (direction == CollisionType.DOWN) {
+				en.moveDown();
+			} else if (direction == CollisionType.LEFT) {
+				en.moveLeft();
+			} else if (direction == CollisionType.RIGHT) {
+				en.moveRight();
+			}
+		}
+	}
+	
+	public void moveEnemies() {
+		//if (!MainEngine.isPaused) {
+			for (int i = 0; i < game.getEnemyArray().size(); i++) {
+				enemyRandomWalk(game.getEnemyArray().get(i));
+				if (hitsPlayer(game.getEnemyArray().get(i))) {
+					game.getPlayer().die();
+				}
+			}
+		//}
+	}
+
 	public void explodeBomb(int bombX) {
 
 				boolean canExpUp = true;
 				boolean canExpDown = true;
 				boolean canExpLeft = true;
 				boolean canExpRight = true;
+				int originX = game.getBombArray().get(bombX).getX();
+				int originY = game.getBombArray().get(bombX).getY();
 				int playerBlastRadius = 2; //bombX.ItemType ??? + set ItemType --> Range of the blast
 				int bossBlastRadius = 2; //bombX.Type ???
 
@@ -135,8 +244,7 @@ public  class  PhysicsManager implements Runnable{
 						: playerBlastRadius); i++) {
 
 					// up
-					Explosion up = new Explosion(game.getBombArray().get(bombX).getX(),
-							 game.getBombArray().get(bombX).getY()); 
+					Explosion up = new Explosion(originX,originY-i*inc); 
 							// - i * game.yInc (yInc = 32) needed?
 							
 			/*	do
@@ -156,9 +264,7 @@ public  class  PhysicsManager implements Runnable{
 					}
 
 					// down
-					Explosion down = new Explosion(game.getBombArray().get(bombX).getX(), game
-							.getBombArray().get(bombX).getY()
-							+ i * game.inc);
+					Explosion down = new Explosion(originX,originY+i*inc); 
 
 					if (canExpDown) {
 						if (game.getBombArray().get(bombX).isBossBomb()) {
@@ -172,8 +278,7 @@ public  class  PhysicsManager implements Runnable{
 					}
 
 					// left
-					Explosion left = new Explosion(game.getBombArray().get(bombX).getX() - i
-							* game.inc, game.getBombArray().get(bombX).getY());
+					Explosion left = new Explosion(originX-i*inc,originY); 
 
 					if (canExpLeft) {
 						if (game.getBombArray().get(bombX).isBossBomb()) {
@@ -187,8 +292,7 @@ public  class  PhysicsManager implements Runnable{
 					}
 
 					// right
-					Explosion right = new Explosion(game.getBombArray().get(bombX).getX() + i
-							* game.inc, game.getBombArray().get(bombX).getY());
+					Explosion right = new Explosion(originX+i*inc ,originY); 
 
 					if (canExpRight) {
 						if (game.getBombArray().get(bombX).isBossBomb()) {
