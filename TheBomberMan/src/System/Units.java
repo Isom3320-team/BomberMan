@@ -4,8 +4,8 @@ import javafx.scene.image.ImageView;
 import javafx.beans.property.*;
 
 public abstract class Units {
-	private IntegerProperty xCoord;
-	private IntegerProperty yCoord;
+	private int xCoord;
+	private int yCoord;
 	private Image image;
 	private ImageView view;
 	private boolean isDead;

@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import System.GameStatus;
 import System.PhysicsManager;
+import System.CollisionType;
 
 public class LeftKey implements EventHandler<KeyEvent>{
 
@@ -17,9 +18,9 @@ public class LeftKey implements EventHandler<KeyEvent>{
 		
 	public void handle(KeyEvent keyevent) {
 		if (gs.getPlayer() != null
-				&& pm.canMove(gs.getPlayer(), PhysicsManager.CollisionType.LEFT)) {
+				&& pm.canMove(gs.getPlayer(), CollisionType.LEFT)) {
 			this.gs.getPlayer().moveLeft();
-			if (pm.hitsEnemy(gs.getPlayer(), PhysicsManager.CollisionType.OVERLAP)) {
+			if (pm.hitsEnemy(gs.getPlayer(), CollisionType.OVERLAP)) {
 				gs.getPlayer().die();
 			}
 		}

@@ -45,7 +45,6 @@ public class GraphicManager extends Application implements Runnable{
 				break;
 			case SPACE:
 				if (gs.getBomb()!=null){
-					int l = gs.bombArray.size();
 					p.getChildren().remove(gs.getBomb().getView());
 					gs.removeBomb();
 					gs.addBomb();

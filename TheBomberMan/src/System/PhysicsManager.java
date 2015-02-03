@@ -15,16 +15,21 @@ import System.Player;
 import System.Item;
 import System.Wall;
 
-public abstract class  PhysicsManager implements Runnable{
-	static int increment;
+public  class  PhysicsManager implements Runnable{
+	static  int increment;
 	static GameStatus game;
+	
+	public PhysicsManager(GameStatus game){ 
+		this.game = game;
+	}
+	
 		@Override
-		public void run() {
+	public void run() {
 			// TODO Auto-generated method stub
 			}
 		// to do : in the detector we need to use switch to distinguish different type of collision
 		// this is useful and can save time
-		public static boolean CollisionDetector(Units unit1, Units unit2,CollisionType type) {
+	public static boolean CollisionDetector(Units unit1, Units unit2,CollisionType type) {
 			
 			if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() + increment)
 				return true;
@@ -38,7 +43,7 @@ public abstract class  PhysicsManager implements Runnable{
 				return false;
 		}
 		
-		public static boolean canMove(Units unit1, CollisionType type) {
+	public static boolean canMove(Units unit1, CollisionType type) {
 			
 			for(int i=0; i < game.getWallArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getWallArray().get(i),type))
@@ -68,26 +73,26 @@ public abstract class  PhysicsManager implements Runnable{
 		
 	}
 		//Both for Boss and Players
-		 public boolean canPlaceBomb(Units unit1,CollisionType type) {
+	public boolean canPlaceBomb(Units unit1) {
 			 
 		 
 			 	for(int i=0; i < game.getWallArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getWallArray().get(i),type))
+					if (CollisionDetector(unit1, game.getWallArray().get(i),CollisionType.OVERLAP))
 							return false;
 					}
 				
 				for(int i=0; i < game.getRockArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getRockArray().get(i),type))
+					if (CollisionDetector(unit1, game.getRockArray().get(i),CollisionType.OVERLAP))
 							return false;
 					}
 				
 				for(int i=0; i < game.getEnemyArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getEnemyArray().get(i),type))
+					if (CollisionDetector(unit1, game.getEnemyArray().get(i),CollisionType.OVERLAP))
 							return false;
 					}
 								
 				for (int i = 0; i < game.getBombArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getBombArray().get(i),type)) 
+					if (CollisionDetector(unit1, game.getBombArray().get(i),CollisionType.OVERLAP)) 
 						return false;
 					}
 				
@@ -106,7 +111,7 @@ public abstract class  PhysicsManager implements Runnable{
 		return true;
 		} 
 		 
-		 public boolean hitsEnemy(Units unit1,CollisionType type) {
+	public boolean hitsEnemy(Units unit1,CollisionType type) {
 				for (int i = 0; i < game.getEnemyArray().size(); i++) {
 					if (CollisionDetector(unit1, game.getEnemyArray().get(i),type)) {
 						return true;
@@ -115,7 +120,7 @@ public abstract class  PhysicsManager implements Runnable{
 				return false;
 			}
 		 
-		 public void explodeBomb(int bombX) {
+	public void explodeBomb(int bombX) {
 
 				boolean canExpUp = true;
 				boolean canExpDown = true;
@@ -199,6 +204,8 @@ public abstract class  PhysicsManager implements Runnable{
 				}
 
 				game.removeBomb(bombX);// change the remove method in the gamestatus 
-			}	
+			}
+
+
 		 
 }

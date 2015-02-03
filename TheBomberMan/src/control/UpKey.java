@@ -3,6 +3,7 @@ package control;
 import javafx.scene.input.KeyEvent;
 import System.GameStatus;
 import System.PhysicsManager;
+import System.CollisionType;
 
 public class UpKey {
 	GameStatus gs;
@@ -15,9 +16,9 @@ public class UpKey {
 	
 	public void handle(KeyEvent keyevent) {
 		if (gs.getPlayer() != null
-				&& pm.canMove(gs.getPlayer(), PhysicsManager.CollisionType.UP)) {
+				&& pm.canMove(gs.getPlayer(), CollisionType.UP)) {
 			this.gs.getPlayer().moveUp();
-			if (pm.hitsEnemy(gs.getPlayer(), PhysicsManager.CollisionType.OVERLAP)) {
+			if (pm.hitsEnemy(gs.getPlayer(), CollisionType.OVERLAP)) {
 				gs.getPlayer().die();
 			}
 		}

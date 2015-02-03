@@ -1,7 +1,6 @@
 package control;
 
 import java.awt.event.ActionEvent;
-
 import System.GameStatus;
 import System.PhysicsManager;
 
@@ -16,7 +15,7 @@ public class SpaceKey {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (gs.getPlayer() != null&& pm.canLayBomb(gs.getPlayer())) {
+		if (gs.getPlayer() != null&& pm.canPlaceBomb(gs.getPlayer())) {
 			this.gs.addBomb();
 		}
 	}
