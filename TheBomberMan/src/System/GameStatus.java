@@ -8,24 +8,13 @@ public class GameStatus {
 	int inc = 32;
 	private final Player player;
 	private Bomb bomb;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private ArrayList<Wall> wallArray;
 	private ArrayList<Rock> rockArray;
 	private ArrayList<Enemy> enemyArray;
 	private ArrayList<Bomb> bombArray;
 	private ArrayList<Item> itemArray;
 	private ArrayList<Explosion> explosionArray;
-=======
-=======
->>>>>>> FETCH_HEAD
-	ArrayList<Bomb> bombArray= new ArrayList<Bomb>();
-	private ArrayList<Wall> wallArray= new ArrayList<Wall>();
-	private ArrayList<Rock> rockArray= new ArrayList<Rock>();
-	private ArrayList<Enemy> enemyArray= new ArrayList<Enemy>();
-	private ArrayList<Minion> minionArray= new ArrayList<Minion>();
-	private ArrayList<Item> itemArray= new ArrayList<Item>();
->>>>>>> FETCH_HEAD
+	private ArrayList<Boss> bossArray;
 	
 	public GameStatus(){
 		player = new Player(0, 0);
@@ -34,22 +23,19 @@ public class GameStatus {
 		enemyArray= new ArrayList<Enemy>();
 		bombArray= new ArrayList<Bomb>();
 		itemArray= new ArrayList<Item>();
+		explosionArray = new ArrayList<Explosion>();
 	}
 	
 	public Player getPlayer(){
 		return player;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 	//Bomb
 	
->>>>>>> FETCH_HEAD
-=======
+
 	//Bomb
-	
->>>>>>> FETCH_HEAD
+
 	public Bomb getBomb(){
 		if (!bombArray.isEmpty()){
 		int l = bombArray.lastIndexOf(bomb);
@@ -69,8 +55,7 @@ public class GameStatus {
 		bombArray.remove(0);
 		}
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	
 	public void removeItem(int index){
 		itemArray.remove(index);
@@ -103,9 +88,6 @@ public class GameStatus {
 		return explosionArray;
 	}
 	
-=======
-=======
->>>>>>> FETCH_HEAD
 	public ArrayList<Bomb> getBombArray() {
 		return bombArray; // Can be used either for Boss AND Player
 	}
@@ -116,14 +98,11 @@ public class GameStatus {
 	public ArrayList<Rock> getRockArray() {
 		return rockArray;
 	}
-	public ArrayList<Minion> getMinionArray() {
-		return minionArray;
+	public ArrayList<Boss> getBossArray() {
+		return bossArray;
 	}
 	public ArrayList<Enemy> getEnemyArray() {
 		return enemyArray;
 	}
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
+
 }
