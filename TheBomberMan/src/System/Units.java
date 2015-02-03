@@ -1,13 +1,15 @@
 package System;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.beans.property.*;
 
 public abstract class Units {
-	private int xCoord;
-	private int yCoord;
+	private IntegerProperty xCoord;
+	private IntegerProperty yCoord;
 	private Image image;
 	private ImageView view;
 	private boolean isDead;
+	
 	
 	
 	public Units(int x, int y) {

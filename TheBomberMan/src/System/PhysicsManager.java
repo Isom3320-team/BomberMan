@@ -2,10 +2,10 @@ package System;
 
 import java.util.ArrayList;
 
-import system.CollisionType;
-import system.Ghost;
-import system.LivingUnit;
-import system.MapObject;
+import System.CollisionType;
+import System.Ghost;
+import System.LivingUnit;
+import System.MapObject;
 import System.Bomb;
 import System.Difficulty;
 import System.Enemy;

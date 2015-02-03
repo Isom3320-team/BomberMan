@@ -5,12 +5,11 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import System.GameStatus;
-import control.DownKey;
+
 
 public class GraphicManager extends Application implements Runnable{
 	GameStatus gs; 
@@ -48,7 +47,6 @@ public class GraphicManager extends Application implements Runnable{
 				if (gs.getBomb()!=null){
 					int l = gs.bombArray.size();
 					p.getChildren().remove(gs.getBomb().getView());
-					System.out.print(gs.bombArray.size());
 					gs.removeBomb();
 					gs.addBomb();
 				}else{
