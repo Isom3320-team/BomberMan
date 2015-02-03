@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import System.CollisionType;
-import System.Ghost;
+import System.FlyMinion;
 import System.LivingObj;
 import System.Units;
 import System.Bomb;
