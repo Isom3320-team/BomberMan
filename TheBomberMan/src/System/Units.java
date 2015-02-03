@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.beans.property.*;
 
 public abstract class Units {
-	private IntegerProperty xCoord = new SimpleIntegerProperty(0);
-	private IntegerProperty yCoord = new SimpleIntegerProperty(0);
+	protected IntegerProperty xCoord = new SimpleIntegerProperty(0);
+	protected IntegerProperty yCoord = new SimpleIntegerProperty(0);
 	
 	private Image image;
 	private ImageView view;
