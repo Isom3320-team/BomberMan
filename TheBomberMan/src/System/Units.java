@@ -86,8 +86,8 @@ public abstract class Units {
 	 * @param unit
 	 */
 	
-	public void paint(GraphicsContext gc, Units unit){
-		gc.drawImage(unit.getImage(), unit.getX(), unit.getY());
+	public void paint(GraphicsContext gc){
+		gc.drawImage(this.getImage(), this.getX(), this.getY());
 	}
 }
 

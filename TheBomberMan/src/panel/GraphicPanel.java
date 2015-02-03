@@ -2,8 +2,12 @@ package panel;
 import java.util.ArrayList;
 import java.util.List;
 
+import System.GameStatus;
+import System.PhysicsManager;
 import System.Player;
+import System.Units;
 import javafx.scene.canvas.*;
+import javafx.scene.input.KeyEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
@@ -12,22 +16,36 @@ import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;;
 
-public class GraphicPanel extends Canvas {
+public abstract class GraphicPanel extends Canvas {
 	protected enum GameState {GAME_MENU, GAME_START, GAME_CONTINUE, GAME_HELP, GAME_SET,GAME_EXIT,GAME_PAUSE};
-	private Player p = new Player();
+	protected GameStatus game;
+	protected PhysicsManager pm;
 	private Timeline timeline;
 	private KeyFrame keyFrame;
 	private int duration = 10;
     protected GameState mGameState = GameState.GAME_MENU;
 	
-	public GraphicPanel(double width, double height){
+	public GraphicPanel(double width, double height, GameStatus game, PhysicsManager pm){
 		super(width,height);
+		this.game = game;
+		this.pm = pm;
 		initTimeLine();
 	}
 	
-	public void draw(GraphicsContext gc){
-		p.paint(gc, p);
+	public abstract void paint(GraphicsContext gc);
+	
+	public void initEvents(){
+		getParent().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				onKeyPressed(event);
+			}
+		});
 	}
+	
+	protected abstract void onKeyPressed(KeyEvent event);
+	
 	
 	private void initTimeLine() {
 		timeline = new Timeline();
@@ -36,7 +54,7 @@ public class GraphicPanel extends Canvas {
 		keyFrame = new KeyFrame(Duration.millis(duration), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				draw(getGraphicsContext2D());
+				paint(getGraphicsContext2D());
 			}
 		});
 		timeline.getKeyFrames().add(keyFrame);
