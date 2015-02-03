@@ -1,50 +1,56 @@
 package System;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.beans.property.*;
 
 public abstract class Units {
-	private int xCoord;
-	private int yCoord;
+	private IntegerProperty xCoord = new SimpleIntegerProperty(0);
+	private IntegerProperty yCoord = new SimpleIntegerProperty(0);
+	
 	private Image image;
 	private ImageView view;
 	private boolean isDead;
 	
-	
-	
-	public Units(int x, int y) {
-		this.xCoord = x;
-		this.yCoord = y;
+	public Units(){
+		this.xCoord = new SimpleIntegerProperty(0);
+		this.yCoord = new SimpleIntegerProperty(0);
 		this.isDead = false;
 	}
 	
-	public int getX() {
+	public Units(int x, int y) {
+		this.xCoord = new SimpleIntegerProperty(x);
+		this.yCoord = new SimpleIntegerProperty(y);
+		this.isDead = false;
+	}
+	
+	public IntegerProperty xCoord() {
 		return xCoord;
 	}
 	
-	public void setX(int xCoord) {
-		this.xCoord = xCoord;
+	public int getX(){
+		return xCoord.get();
 	}
 	
-	public int getY() {
+	public void setX(int x) {
+		this.xCoord.set(x);
+	}
+	
+	public IntegerProperty yCoord(){
 		return yCoord;
 	}
 	
-	public void setY(int yCoord) {
-		this.yCoord = yCoord;
+	public int getY() {
+		return yCoord.get();
 	}
 	
-	public void setCoordinates(int xCoord, int yCoord) {
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
+	public void setY(int y) {
+		this.yCoord.set(y);
 	}
 	
-	public Image getImage() {
-		return image;
-	}
-	
-	public void setImage(Image image) {
-		this.image = image;
+	public void setCoordinates(int x, int y) {
+		this.xCoord.set(x);
+		this.yCoord.set(y);
 	}
 	
 	public boolean isDead() {
@@ -54,11 +60,17 @@ public abstract class Units {
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
-
+	
+	
+	public Image getImage() {
+		return image;
+	}
+	public void setImage(Image image) {
+		this.image = image;
+	}
 	public ImageView getView() {
 		return view;
 	}
-
 	public void setView(ImageView view) {
 		this.view = view;
 	}
@@ -67,5 +79,14 @@ public abstract class Units {
 		this.view = iv ;
 	}
 
+	/**this paint method draw an image on the graphics context on the canvas
+	 * 
+	 * @param gc
+	 * @param unit
+	 */
+	
+	public void paint(GraphicsContext gc, Units unit){
+		gc.drawImage(unit.getImage(), unit.getX(), unit.getY());
+	}
 }
 

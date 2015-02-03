@@ -2,7 +2,9 @@ package System;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import System.Item.ItemType;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -11,6 +13,7 @@ public class Player extends LivingObj{
 	private boolean godmode, isAlive; 
 	private String name;
 	private boolean isActivePlayer;
+	
 	public Player(int x, int y) {
 		super(x, y);
 		
@@ -28,6 +31,7 @@ public class Player extends LivingObj{
 		name = "Default Name ";// to do: prompt the use to input the name;
 		isActivePlayer = true;
 	}
+	
 	public int giveLive(){
 		return lives;
 	}
@@ -144,4 +148,5 @@ public class Player extends LivingObj{
 			}
 		}
 	}*/
+	
 }
