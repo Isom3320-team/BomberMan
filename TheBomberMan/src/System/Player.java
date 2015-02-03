@@ -1,10 +1,8 @@
 package System;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import System.Item.ItemType;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -13,6 +11,10 @@ public class Player extends LivingObj{
 	private boolean godmode, isAlive; 
 	private String name;
 	private boolean isActivePlayer;
+	
+	public Player(){
+		super(0, 0);
+	}
 	
 	public Player(int x, int y) {
 		super(x, y);
