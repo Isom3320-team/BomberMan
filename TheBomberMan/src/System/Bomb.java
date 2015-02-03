@@ -38,5 +38,8 @@ public class Bomb extends NonLivingObj implements Killable {
 	public boolean getbossBomb(){
 		return bossBomb;
 	}
+	public boolean isBossBomb(){
+		return bossBomb;
+	}
 
 }

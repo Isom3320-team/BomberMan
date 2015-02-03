@@ -55,36 +55,24 @@ public class GameStatus {
 		bombArray.remove(0);
 		}
 	}
+	public void removeBomb(int index){
+		bombArray.remove(index);
+	}
 
-	
 	public void removeItem(int index){
 		itemArray.remove(index);
 	}
+	
 	public void addExplosion(Explosion x) {
 		explosionArray.add(x);
 	}
 	
-	public ArrayList<Wall> getWalls(){
-		return wallArray;
-	}
 	
-	public ArrayList<Rock> getRocks(){
-		return rockArray;
-	}
-	
-	public ArrayList<Enemy> getEnemies(){
-		return enemyArray;
-	}
-	
-	public ArrayList<Item> getItems(){
+	public ArrayList<Item> getItemArray(){
 		return itemArray;
 	}
 	
-	public ArrayList<Bomb> getBombs(){
-		return bombArray;
-	}
-	
-	public ArrayList<Explosion> getExplosions(){
+	public ArrayList<Explosion> getExplosionArray(){
 		return explosionArray;
 	}
 	

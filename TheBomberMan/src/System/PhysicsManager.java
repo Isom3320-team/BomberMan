@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import System.CollisionType;
 import System.Ghost;
-import System.LivingUnit;
-import System.MapObject;
+import System.LivingObj;
+import System.Units;
 import System.Bomb;
 import System.Difficulty;
 import System.Enemy;
@@ -22,8 +22,10 @@ public abstract class  PhysicsManager implements Runnable{
 		public void run() {
 			// TODO Auto-generated method stub
 			}
-		
-		public static boolean CollisionDetector(Units unit1, Units unit2) {
+		// to do : in the detector we need to use switch to distinguish different type of collision
+		// this is useful and can save time
+		public static boolean CollisionDetector(Units unit1, Units unit2,CollisionType type) {
+			
 			if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() + increment)
 				return true;
 			else if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() + increment)
@@ -36,28 +38,28 @@ public abstract class  PhysicsManager implements Runnable{
 				return false;
 		}
 		
-		public static boolean canMove(Units unit1) {
+		public static boolean canMove(Units unit1, CollisionType type) {
 			
 			for(int i=0; i < game.getWallArray().size(); i++) {
-				if (CollisionDetector(unit1, game.getWallArray().get(i)))
+				if (CollisionDetector(unit1, game.getWallArray().get(i),type))
 						return false;
 				}
 			
 			for(int i=0; i < game.getRockArray().size(); i++) {
-				if (CollisionDetector(unit1, game.getRockArray().get(i)))
+				if (CollisionDetector(unit1, game.getRockArray().get(i),type))
 						return false;
 				}
 			
 			if (unit1 instanceof Enemy) {
 			for(int i=0; i < game.getEnemyArray().size(); i++) {
-				if (CollisionDetector(unit1, game.getEnemyArray().get(i)))
+				if (CollisionDetector(unit1, game.getEnemyArray().get(i),type))
 						return false;
 				}
 			}
 			
 		if (!(unit1 instanceof Bomb)) {
 			for (int i = 0; i < game.getBombArray().size(); i++) {
-				if (CollisionDetector(unit1, game.getBombArray().get(i))) {
+				if (CollisionDetector(unit1, game.getBombArray().get(i),type)) {
 					return false;
 				}
 			}
@@ -66,26 +68,26 @@ public abstract class  PhysicsManager implements Runnable{
 		
 	}
 		//Both for Boss and Players
-		 public boolean canPlaceBomb(Units unit1) {
+		 public boolean canPlaceBomb(Units unit1,CollisionType type) {
 			 
 		 
 			 	for(int i=0; i < game.getWallArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getWallArray().get(i)))
+					if (CollisionDetector(unit1, game.getWallArray().get(i),type))
 							return false;
 					}
 				
 				for(int i=0; i < game.getRockArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getRockArray().get(i)))
+					if (CollisionDetector(unit1, game.getRockArray().get(i),type))
 							return false;
 					}
 				
 				for(int i=0; i < game.getEnemyArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getEnemyArray().get(i)))
+					if (CollisionDetector(unit1, game.getEnemyArray().get(i),type))
 							return false;
 					}
 								
 				for (int i = 0; i < game.getBombArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getBombArray().get(i))) 
+					if (CollisionDetector(unit1, game.getBombArray().get(i),type)) 
 						return false;
 					}
 				
@@ -104,9 +106,9 @@ public abstract class  PhysicsManager implements Runnable{
 		return true;
 		} 
 		 
-		 public boolean hitsEnemy(Units unit1) {
+		 public boolean hitsEnemy(Units unit1,CollisionType type) {
 				for (int i = 0; i < game.getEnemyArray().size(); i++) {
-					if (CollisionDetector(unit1, game.getEnemyArray().get(i))) {
+					if (CollisionDetector(unit1, game.getEnemyArray().get(i),type)) {
 						return true;
 					}
 				}
@@ -138,65 +140,65 @@ public abstract class  PhysicsManager implements Runnable{
 				while */
 					
 					if (canExpUp) {
-						if (gs.getBombs().get(index).isBossBomb()) {
-							u.setBossExplosion(true);
+						if (game.getBombArray().get(bombX).isBossBomb()) {
+							up.setBossExplosion(true);
 						}
-						gs.addExplosion(u);
+						game.addExplosion(up);
 					}
 
-					if (!canMove(u, CollisionType.UP)) {
+					if (!canMove(up, CollisionType.UP)) {
 						canExpUp = false;
 					}
 
 					// down
-					Explosion d = new Explosion(gs.getBombs().get(index).getxPos(), gs
-							.getBombs().get(index).getyPos()
-							+ i * gs.yInc);
+					Explosion down = new Explosion(game.getBombArray().get(bombX).getX(), game
+							.getBombArray().get(bombX).getY()
+							+ i * game.inc);
 
 					if (canExpDown) {
-						if (gs.getBombs().get(index).isBossBomb()) {
-							d.setBossExplosion(true);
+						if (game.getBombArray().get(bombX).isBossBomb()) {
+							down.setBossExplosion(true);
 						}
-						gs.addExplosion(d);
+						game.addExplosion(down);
 					}
 
-					if (!canMove(d, CollisionType.DOWN)) {
+					if (!canMove(down, CollisionType.DOWN)) {
 						canExpDown = false;
 					}
 
 					// left
-					Explosion l = new Explosion(gs.getBombs().get(index).getxPos() - i
-							* gs.xInc, gs.getBombs().get(index).getyPos());
+					Explosion left = new Explosion(game.getBombArray().get(bombX).getX() - i
+							* game.inc, game.getBombArray().get(bombX).getY());
 
 					if (canExpLeft) {
-						if (gs.getBombs().get(index).isBossBomb()) {
-							l.setBossExplosion(true);
+						if (game.getBombArray().get(bombX).isBossBomb()) {
+							left.setBossExplosion(true);
 						}
-						gs.addExplosion(l);
+						game.addExplosion(left);
 					}
 
-					if (!canMove(l, CollisionType.LEFT)) {
+					if (!canMove(left, CollisionType.LEFT)) {
 						canExpLeft = false;
 					}
 
 					// right
-					Explosion r = new Explosion(gs.getBombs().get(index).getxPos() + i
-							* gs.xInc, gs.getBombs().get(index).getyPos());
+					Explosion right = new Explosion(game.getBombArray().get(bombX).getX() + i
+							* game.inc, game.getBombArray().get(bombX).getY());
 
 					if (canExpRight) {
-						if (gs.getBombs().get(index).isBossBomb()) {
-							r.setBossExplosion(true);
+						if (game.getBombArray().get(bombX).isBossBomb()) {
+							right.setBossExplosion(true);
 						}
-						gs.addExplosion(r);
+						game.addExplosion(right);
 					}
 
-					if (!canMove(r, CollisionType.RIGHT)) {
+					if (!canMove(right, CollisionType.RIGHT)) {
 						canExpRight = false;
 					}
 
 				}
 
-				gs.removeBomb(index);
+				game.removeBomb(bombX);// change the remove method in the gamestatus 
 			}	
 		 
 }
