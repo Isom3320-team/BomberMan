@@ -6,6 +6,7 @@ public class Minion extends Enemy {
 	
 	public Minion(int x, int y) {
 		super(x, y);
-		Image image = new Image("Image/minion.png", 50.0, 50.0, false, true);
+		Image image = new Image("Image/minion.png", 32.0, 32.0, false, true);
+		this.setImage(image);
 	}
 }

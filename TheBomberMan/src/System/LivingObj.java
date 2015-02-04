@@ -10,19 +10,19 @@ public abstract class LivingObj extends Units implements Killable,Movable{
 	}
 
 	public void moveUp() {
-		this.xCoord.set(getX() - moveInc);
-	}
-	
-	public void moveDown() {
-		this.xCoord.set(getX() + moveInc);
-	}
-	
-	public void moveLeft(){
 		this.yCoord.set(getY() - moveInc);
 	}
 	
-	public void moveRight(){
+	public void moveDown() {
 		this.yCoord.set(getY() + moveInc);
+	}
+	
+	public void moveLeft(){
+		this.xCoord.set(getX() - moveInc);
+	}
+	
+	public void moveRight(){
+		this.xCoord.set(getX() + moveInc);
 	}
 	
 }

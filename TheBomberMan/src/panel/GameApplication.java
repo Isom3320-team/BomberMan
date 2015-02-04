@@ -1,26 +1,26 @@
 package panel;
 
 import System.GameStatus;
+import System.GraphicEngine;
 import System.PhysicsManager;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public abstract class GameApplication extends Application{
+public  class GameApplication extends Application{
 	protected Group mGroup;
 	protected Scene mScene;
-    protected GameStatus game;
+    protected GameStatus game ;
     protected PhysicsManager pm;
     
-    public GameApplication (GameStatus game, PhysicsManager pm ){
-    	this.game = game;
-    	this.pm = pm;
+    public GameApplication(){
+    	
     }
-    
     
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		game = new GameStatus();
 		loadBefore();
 		mGroup= new Group();
 		mScene = new Scene(mGroup, Window.WIDTH, Window.HEIGHT);		
@@ -28,9 +28,13 @@ public abstract class GameApplication extends Application{
 		showStage(primaryStage);
 	}
 	
-	protected abstract void loadBefore();
+	protected void loadBefore(){;
+
+	}
 	
-	protected abstract void loadEnd();
+	protected void loadEnd(){
+		
+	};
 	
 	protected void showStage(Stage stage){
 		stage.setScene(mScene);

@@ -6,21 +6,22 @@ import java.util.Iterator;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
-public class MainEngine   {
+public class MainEngine  {
     public static GameStatus gs;
     static Thread graphicThread;
     static Sound sound;
 
-	 
     public static void main(String[] args){
-    	Image image = new Image("Image/baozou.png", 100.0, 100.0, false, true);
-    	//GameStatus gs = new GameStatus();
-		//PhysicsManager pm = new PhysicsManager(gs);
-		//GraphicEngine ge = new GraphicEngine(gs,pm);
-		//ge.launch(args);
+    	
 		
 	}
+
+	public GameStatus getGameStatus(){
+		return gs;
+	}
+    
 	public static void levelUp() {
    		gs.getPlayer().setLevel(gs.getPlayer().getLevel() + 1);
    		gs.InitializeGame(gs.getPlayer().getLevel());

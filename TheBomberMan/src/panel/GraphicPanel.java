@@ -17,21 +17,20 @@ import javafx.event.EventHandler;;
 
 public abstract class GraphicPanel extends Canvas {
 	protected enum GamePanel {GAME_MENU, GAME_START, GAME_CONTINUE, GAME_HELP, GAME_SET,GAME_EXIT,GAME_PAUSE};
-	protected GameStatus game;
+	protected GameStatus game = new GameStatus();
 	protected PhysicsManager pm;
 	private Timeline timeline;
 	private KeyFrame keyFrame;
 	private int duration = 10;
     protected GamePanel mGameState = GamePanel.GAME_MENU;
+    protected GraphicsContext gc = this.getGraphicsContext2D();
 	
 	public GraphicPanel(double width, double height, GameStatus game, PhysicsManager pm){
 		super(width,height);
-		this.game = game;
-		this.pm = pm;
 		initTimeLine();
 	}
 	
-	public abstract void paint(GraphicsContext gc);
+	public abstract void drawpanel(GraphicsContext gc);
 	
 	
 	public void initEvents(){
@@ -54,7 +53,7 @@ public abstract class GraphicPanel extends Canvas {
 		keyFrame = new KeyFrame(Duration.millis(duration), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				paint(getGraphicsContext2D());
+				drawpanel(gc);
 			}
 		});
 		timeline.getKeyFrames().add(keyFrame);

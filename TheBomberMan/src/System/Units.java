@@ -76,7 +76,11 @@ public abstract class Units {
 	 */
 	
 	public void paint(GraphicsContext gc){
+		if(this.getImage()!=null){
 		gc.drawImage(this.getImage(), this.getX(), this.getY());
+		}else{
+			System.out.print("paint player");
+		}
 	}
 }
 

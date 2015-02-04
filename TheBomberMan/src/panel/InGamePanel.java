@@ -13,13 +13,16 @@ public class InGamePanel extends GraphicPanel {
 	public InGamePanel(double width, double height, GameStatus game,
 			PhysicsManager pm) {
 		super(width, height, game, pm);
+		this.game = game;
+		this.mGameState= GamePanel.GAME_START;
+		this.pm = pm;
 		
 	}
 
 	@Override
-public void paint(GraphicsContext gc) {
-		
-		game.getPlayer().paint(gc);
+public void drawpanel(GraphicsContext gc) {
+
+		game.getPlayer().paint(getGraphicsContext2D());
 		
 		for (int i = 0; i < game.getBombArray().size(); i++) {
 			game.getBombArray().get(i).paint(gc);
@@ -50,8 +53,8 @@ public void paint(GraphicsContext gc) {
 	protected void onKeyPressed(KeyEvent event) {
 	       switch (event.getCode()) {
 	   	case UP:
-	   		if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.DOWN)) {
-	   			this.game.getPlayer().moveDown();
+	   		if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.UP)) {
+	   			this.game.getPlayer().moveUp();
 	   			if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 	   				game.getPlayer().die();
 	   			}

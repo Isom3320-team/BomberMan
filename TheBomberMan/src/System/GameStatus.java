@@ -33,7 +33,7 @@ public class GameStatus {
 	
 	
 	public GameStatus(){
-		player = new Player(0, 0);
+		player = new Player(32, 32);
 		wallArray= new ArrayList<Wall>();
 		rockArray= new ArrayList<Rock>();
 		enemyArray= new ArrayList<Enemy>();
