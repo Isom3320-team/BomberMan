@@ -54,6 +54,7 @@ public void drawpanel(GraphicsContext gc) {
 	       switch (event.getCode()) {
 	   	case UP:
 	   		if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.UP)) {
+	   			this.game.getPlayer().clear(gc);
 	   			this.game.getPlayer().moveUp();
 	   			if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 	   				game.getPlayer().die();
@@ -62,14 +63,17 @@ public void drawpanel(GraphicsContext gc) {
 	   		break;
 	   	case DOWN:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.DOWN)) {
+				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveDown();
 				if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 					game.getPlayer().die();
 				}
+				
 			}
 	   		break;
 	   	case LEFT:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.LEFT)) {
+				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveLeft();
 				if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 					game.getPlayer().die();
@@ -78,6 +82,7 @@ public void drawpanel(GraphicsContext gc) {
 	   		break;
 	   	case RIGHT:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.RIGHT)) {
+				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveRight();
 				if (pm.hitsEnemy(game.getPlayer(),  CollisionType.OVERLAP)) {
 					game.getPlayer().die();

@@ -82,5 +82,9 @@ public abstract class Units {
 			System.out.print("paint player");
 		}
 	}
+	public void clear(GraphicsContext gc){
+		gc.clearRect(this.getX(), this.getY(), 32, 32);
+	}
+	
 }
 

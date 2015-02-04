@@ -33,6 +33,7 @@ public abstract class GraphicPanel extends Canvas {
 	public abstract void drawpanel(GraphicsContext gc);
 	
 	
+	
 	public void initEvents(){
 		getParent().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
