@@ -1,13 +1,24 @@
 package panel;
 
+import System.GameStatus;
+import System.PhysicsManager;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public abstract class GameApplication extends Application{
-    private Group mGroup;
-    private Scene mScene;
+	protected Group mGroup;
+	protected Scene mScene;
+    protected GameStatus game;
+    protected PhysicsManager pm;
+    
+    public GameApplication (GameStatus game, PhysicsManager pm ){
+    	this.game = game;
+    	this.pm = pm;
+    }
+    
+    
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		loadBefore();

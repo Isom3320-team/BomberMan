@@ -11,19 +11,18 @@ import javafx.scene.input.KeyEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
-import javafx.scene.Group;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;;
 
 public abstract class GraphicPanel extends Canvas {
-	protected enum GameState {GAME_MENU, GAME_START, GAME_CONTINUE, GAME_HELP, GAME_SET,GAME_EXIT,GAME_PAUSE};
+	protected enum GamePanel {GAME_MENU, GAME_START, GAME_CONTINUE, GAME_HELP, GAME_SET,GAME_EXIT,GAME_PAUSE};
 	protected GameStatus game;
 	protected PhysicsManager pm;
 	private Timeline timeline;
 	private KeyFrame keyFrame;
 	private int duration = 10;
-    protected GameState mGameState = GameState.GAME_MENU;
+    protected GamePanel mGameState = GamePanel.GAME_MENU;
 	
 	public GraphicPanel(double width, double height, GameStatus game, PhysicsManager pm){
 		super(width,height);
@@ -33,6 +32,7 @@ public abstract class GraphicPanel extends Canvas {
 	}
 	
 	public abstract void paint(GraphicsContext gc);
+	
 	
 	public void initEvents(){
 		getParent().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -58,5 +58,16 @@ public abstract class GraphicPanel extends Canvas {
 			}
 		});
 		timeline.getKeyFrames().add(keyFrame);
+	}
+	
+	public void start(){
+		timeline.play();
+	}
+	
+	public void pause(){
+		timeline.pause();
+	}
+	public void stop(){
+		timeline.stop();
 	}
 }

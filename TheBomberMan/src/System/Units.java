@@ -10,7 +10,6 @@ public abstract class Units {
 	protected IntegerProperty yCoord = new SimpleIntegerProperty(0);
 	
 	private Image image;
-	private ImageView view;
 	private boolean isDead;
 	
 	public Units(){
@@ -68,16 +67,6 @@ public abstract class Units {
 	}
 	public void setImage(Image image) {
 		this.image = image;
-	}
-	public ImageView getView() {
-		return view;
-	}
-	public void setView(ImageView view) {
-		this.view = view;
-	}
-	public void setView(){
-		ImageView iv = new ImageView(this.getImage());
-		this.view = iv ;
 	}
 
 	/**this paint method draw an image on the graphics context on the canvas

@@ -1,7 +1,5 @@
 package System;
 
-import Sound;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Iterator;
@@ -15,13 +13,13 @@ public class MainEngine   {
     static Sound sound;
 
 	 
-    public static void main(String[] args) {
-		gm = new GraphicManager();
-		graphicThread = new Thread(gm);
-		graphicThread.start();
-		sound = new Sound();
-
-      }
+    public static void main(String[] args){
+		GameStatus gs = new GameStatus();
+		PhysicsManager pm = new PhysicsManager(gs);
+		GraphicEngine ge = new GraphicEngine(gs,pm);
+		ge.launch(args);
+		
+	}
 	public static void levelUp() {
    		gs.getPlayer().setLevel(gs.getPlayer().getLevel() + 1);
    		gs.InitializeGame(gs.getPlayer().getLevel());
