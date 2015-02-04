@@ -1,7 +1,11 @@
 package System;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.Timer;
 
 import System.CollisionType;
 import System.FlyMinion;
@@ -26,7 +30,38 @@ public  class  PhysicsManager implements Runnable{
 	
 		@Override
 	public void run() {
-			// TODO Auto-generated method stub
+			//just have to check how to make the ActionEvent run 
+			ActionListener listener = new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					checkGameOver();
+
+					if (!game.isGameOver()) {
+						winning();
+						explosionDetector();
+						itemPickUp();
+
+					}
+					removeCorpse();
+
+				}
+
+			};
+			Timer timer = new Timer(100, listener);
+			timer.start();
+
+			ActionListener listener2 = new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					moveEnemies();
+				}
+
+			};
+			Timer timer2 = new Timer(600, listener2);
+			timer2.start();
+		
 			}
 		// to do : in the detector we need to use switch to distinguish different type of collision
 		// this is useful and can save time
@@ -150,7 +185,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 		return false;
 	}
-	public void ItemPickUp() {
+	public void itemPickUp() {
 		for (int i = 0; i < game.getItemArray().size(); i++) {
 			if (CollisionDetector(game.getPlayer(), game.getItemArray().get(i),
 					CollisionType.OVERLAP)) {
@@ -159,7 +194,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		}
 	}
-	public void ExplosionDetector() {
+	public void explosionDetector() {
 		for (int i = 0; i < game.getExplosionArray().size(); i++) {
 			for (int j = 0; j < game.getWallArray().size(); j++) {
 				if (CollisionDetector(game.getExplosionArray().get(i), game.getWallArray()
@@ -245,12 +280,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 					// up
 					Explosion up = new Explosion(originX,originY-i*inc); 
-							// - i * game.yInc (yInc = 32) needed?
-							
-			/*	do
-					if canMove(game.getBombArray().get(bombX).getX()+increment)
-						Explosion
-				while */
+		
 					
 					if (canExpUp) {
 						if (game.getBombArray().get(bombX).isBossBomb()) {
@@ -309,7 +339,48 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 				game.removeBomb(bombX);// change the remove method in the gamestatus 
 			}
+	public void removeCorpse() { //trigger explodeBombs
+		for (int i = 0; i < game.getBombArray().size(); i++) {
+			if (game.getBombArray().get(i).isDead()) {
+				explodeBomb(i);
+			}
+		}
 
+		for (int i = 0; i < game.getExplosionArray().size(); i++) {
+			if (game.getExplosionArray().get(i).isDead()) {
+				game.removeExplosion(i);
+			}
+		}
+
+		for (int i = 0; i < game.getEnemyArray().size(); i++) {
+			if (game.getEnemyArray().get(i).isDead()) {
+				game.removeEnemy(i);
+			}
+		}
+
+		for (int i = 0; i < game.getWallArray().size(); i++) {
+			if (game.getWallArray().get(i).isDead()) {
+				game.removeWall(i);
+			}
+		}
+
+		
+	}
+
+	public void winning() {
+		if (game.getEnemyArray().isEmpty()) {
+			MainEngine.levelUp();
+		}
+	}
+
+	/* set
+	 */
+	public void checkGameOver() {
+		if ( game.isGameOver() == true) {
+			MainEngine.scoreCopy();
+			game.setGameOver(true);
+		}
+	}	 
 
 		 
 }

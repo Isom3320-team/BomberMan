@@ -65,10 +65,13 @@ public class Player extends LivingObj{
 	public void setScore(int sc){
 		this.score = sc;
 	}
-	
+	/* no need this function 
+	 * ex: setScore(getScore() +100)
+	 
 	public void addScore(int addScore){
 		this.score += addScore;
 	}
+	 */
 	
 	public void consume(Item item){
 		// to do: get the Item type and add attributes to the player

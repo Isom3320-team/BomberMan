@@ -20,7 +20,7 @@ public class GameStatus {
 	int fieldHeight = 384;
 	int inc = 32;
 	
-	private final Player player;
+	private Player player;
 	private Bomb bomb;
 	private ArrayList<Wall> wallArray;
 	private ArrayList<Rock> rockArray;
@@ -29,6 +29,8 @@ public class GameStatus {
 	private ArrayList<Item> itemArray;
 	private ArrayList<Explosion> explosionArray;
 	private ArrayList<Boss> bossArray;
+	private boolean gameOver;
+	
 	
 	public GameStatus(){
 		player = new Player(0, 0);
@@ -39,6 +41,8 @@ public class GameStatus {
 		itemArray= new ArrayList<Item>();
 		explosionArray = new ArrayList<Explosion>();
 		InitializeGame(1);
+		gameOver = false;
+		
 	}
 	
 	public Player getPlayer(){
@@ -100,6 +104,16 @@ public class GameStatus {
 	public ArrayList<Enemy> getEnemyArray() {
 		return enemyArray;
 	}
+	
+	public void removeExplosion(int index){
+		explosionArray.remove(index);
+	}
+	public void removeEnemy(int index){
+		enemyArray.remove(index);
+	}
+	public void removeWall(int index){
+		wallArray.remove(index);
+	}
 
 	public void InitializeGame(int lvl){
 		bombArray = new ArrayList<Bomb>();
@@ -153,5 +167,13 @@ public class GameStatus {
 				}
 			}
 		}
+		
+	}
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
 	}
 }
