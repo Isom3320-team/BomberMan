@@ -21,7 +21,7 @@ import System.Item;
 import System.Wall;
 
 public  class  PhysicsManager implements Runnable{
-	static  int inc;
+	static  int inc = 32;
 	static GameStatus game;
 	
 	public PhysicsManager(GameStatus game){ 
@@ -68,31 +68,31 @@ public  class  PhysicsManager implements Runnable{
 public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType type) {
 			
 			if (type == CollisionType.UP) {
-				if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() - inc){
+				if (unit1.getX() == unit2.getX() && unit2.getY() == (unit1.getY() - inc)){
 					return true;
 				}
 			}
 			
 			if (type == CollisionType.DOWN) {	
-				if (unit1.getX() == unit2.getX() && unit1.getY() == unit2.getY() + inc){
+				if (unit1.getX() == unit2.getX() && unit2.getY() == (unit1.getY() + inc)){
 					return true;
 				}
 			}
 			
 			if (type == CollisionType.RIGHT) {
-				if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() + inc){
+				if (unit1.getY() == unit2.getY() && unit2.getX() == (unit1.getX() + inc)){
 					return true;
 				}
 			}
 			
 			if (type == CollisionType.LEFT) {
-				if (unit1.getY() == unit2.getY() && unit1.getX() == unit2.getX() - inc){
+				if (unit1.getY() == unit2.getY() && unit2.getX() == (unit1.getX() - inc)){
 					return true;
 				}
 			}
 			
 			if (type == CollisionType.OVERLAP) {
-				if (unit1.getX() == unit2.getY() && unit1.getY() == unit2.getY()){
+				if (unit1.getX() == unit2.getY() && unit2.getY() == unit1.getY()){
 					return true;
 				}
 			}
@@ -105,12 +105,14 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			
 			for(int i=0; i < game.getWallArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getWallArray().get(i),type))
-						return false;
+					{System.out.print("colision with wall");
+						return false;}
 				}
 			
 			for(int i=0; i < game.getRockArray().size(); i++) {
-				if (CollisionDetector(unit1, game.getRockArray().get(i),type))
-						return false;
+				if (CollisionDetector(unit1, game.getRockArray().get(i),type)){
+					System.out.print("colision with raock");
+						return false;}
 				}
 			
 			if (unit1 instanceof Enemy) {
@@ -120,7 +122,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				}
 			}
 			
-		if (!(unit1 instanceof Bomb)) {
+			if (!(unit1 instanceof Bomb)) {
 			for (int i = 0; i < game.getBombArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getBombArray().get(i),type)) {
 					return false;

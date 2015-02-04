@@ -7,15 +7,17 @@ import java.util.Iterator;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import System.GraphicEngine;
 
-public class MainEngine  {
+public class MainEngine extends Application  {
     public static GameStatus gs;
     static Thread graphicThread;
     static Sound sound;
 
     public static void main(String[] args){
+    	GraphicEngine ge = new GraphicEngine();
+    	ge.launchGraphicEngine();
     	
-		
 	}
 
 	public GameStatus getGameStatus(){
@@ -46,5 +48,11 @@ public class MainEngine  {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

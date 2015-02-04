@@ -54,44 +54,66 @@ public void drawpanel(GraphicsContext gc) {
 	       switch (event.getCode()) {
 	   	case UP:
 	   		if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.UP)) {
+	   			System.out.println("can move");
 	   			this.game.getPlayer().clear(gc);
 	   			this.game.getPlayer().moveUp();
 	   			if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 	   				game.getPlayer().die();
 	   			}
+	   		}else{
+	   			System.out.println("cannotmove");
+	   			
+	   			break;
 	   		}
 	   		break;
 	   	case DOWN:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.DOWN)) {
+				System.out.println("can move");
 				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveDown();
 				if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 					game.getPlayer().die();
 				}
 				
+			}else{
+				System.out.println("cannotmove");
+				break;
 			}
 	   		break;
 	   	case LEFT:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.LEFT)) {
+				System.out.println("can move");
 				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveLeft();
 				if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 					game.getPlayer().die();
 				}
+			}else{
+				System.out.println("cannotmove");
+				
+				break;
 			}
 	   		break;
 	   	case RIGHT:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.RIGHT)) {
+				System.out.println("can move");
 				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveRight();
 				if (pm.hitsEnemy(game.getPlayer(),  CollisionType.OVERLAP)) {
 					game.getPlayer().die();
 				}
+			}else{
+				System.out.println("cannotmove");
+				
+				break;
 			}
 	   		break;
 	   	case SPACE:
 			if (game.getPlayer() != null&& pm.canPlaceBomb(game.getPlayer())) {
+				System.out.println("can place");
 				this.game.addBomb();
+			}else{
+				break;
 			}
 	   		break;
 	   	default:
