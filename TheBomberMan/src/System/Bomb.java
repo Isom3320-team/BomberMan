@@ -27,6 +27,7 @@ public class Bomb extends NonLivingObj implements Killable {
 	@Override
 	public void die() {
 		this.setDead(true);
+		System.out.println("bomb dead");
 		this.timer.cancel();
 	}
 	

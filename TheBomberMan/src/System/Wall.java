@@ -5,7 +5,7 @@ public class Wall extends NonLivingObj implements Killable {
 
 	public Wall(int x, int y) {
 		super(x, y);
-		Image img = new Image("Image/item 2.png",32,32,false,true);
+		Image img = new Image("Image/explosion.png",32,32,false,true);
 		this.setImage(img);
 	}
 

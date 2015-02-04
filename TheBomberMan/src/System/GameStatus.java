@@ -135,7 +135,7 @@ public class GameStatus {
 			enemyArray.add(new Boss(480,320));
 		} else {
 			enemyCount = 5;
-			wallCount = 50;
+			wallCount = 40;
 		}
 
 		for (int i = 0; i < fieldWidth; i += inc) {
@@ -148,7 +148,7 @@ public class GameStatus {
 				} 
 				
 				// create wall, but leave space for player and boss
-				if ((i > 3 * inc) || (j > 3 * inc) && i != 480
+				else if ((i > 3 * inc) || (j > 3 * inc) && i != 480
 						&& j != 320) {
 					// chance of softblock
 					if ((new Random().nextInt(100)) < wallCount) {

@@ -10,12 +10,11 @@ import System.PhysicsManager;
 public class InGamePanel extends GraphicPanel {
 	
 	
-	public InGamePanel(double width, double height, GameStatus game,
-			PhysicsManager pm) {
-		super(width, height, game, pm);
-		this.game = game;
+	public InGamePanel(double width, double height) {
+		super(width, height);
+		this.game = new GameStatus();
 		this.mGameState= GamePanel.GAME_START;
-		this.pm = pm;
+		this.pm = new PhysicsManager(game);
 		
 	}
 

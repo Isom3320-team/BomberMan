@@ -32,7 +32,7 @@ public class GraphicEngine extends GameApplication {
 	@Override
 	protected void loadEnd() {
 		
-		InGamePanel inGamePanel = new InGamePanel(Window.WIDTH,Window.HEIGHT,game,pm);
+		InGamePanel inGamePanel = new InGamePanel(Window.WIDTH,Window.HEIGHT);
 		getRoot().getChildren().add(inGamePanel);
 		inGamePanel.start();
 		inGamePanel.initEvents();
