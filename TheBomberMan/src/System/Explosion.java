@@ -24,8 +24,7 @@ public class Explosion extends NonLivingObj implements Killable {
 		lifeTime = 1000;
 		Image image = new Image("Image/explosion.png", 100.0, 100.0, false, true);
 		this.setImage(image);
-		ImageView imgView = new ImageView(image);
-		this.setView(imgView);
+		
 		
 		( timer).schedule(new TimerTask(){
 			@Override

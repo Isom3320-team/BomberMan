@@ -16,8 +16,6 @@ public class Bomb extends NonLivingObj implements Killable {
 		lifeTime = 5000;
 		Image image = new Image("Image/baozou.png", 50.0, 50.0, false, true);
 		this.setImage(image);
-		ImageView imgView = new ImageView(image);
-		this.setView(imgView);
 		timer.schedule(new TimerTask(){
 		@Override
 		public void run(){

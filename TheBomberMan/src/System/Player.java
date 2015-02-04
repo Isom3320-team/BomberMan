@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 import System.Item.ItemType;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Player extends LivingObj{
 	private int score, level, lives,maxBomb, bombRadius, blastRadius, speed; //What are these unused variables?
@@ -19,7 +18,7 @@ public class Player extends LivingObj{
 	public Player(int x, int y) {
 		super(x, y);
 		
-		Image image = new Image("http://www.hzwfxz.com/wp-content/uploads/2014/06/baozou.jpg", 100.0, 100.0, false, true);
+		Image image = new Image("Image/baozou.png", 100.0, 100.0, false, true);
 		this.setImage(image);
 		lives = 3;
 		maxBomb = 1;

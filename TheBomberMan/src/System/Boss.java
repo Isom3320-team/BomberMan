@@ -14,7 +14,7 @@ public class Boss extends FlyMinion {
 		placeBombDelay = 5000;
 		Image image = new Image("Image/boss.png", 50.0, 50.0, false, true);
 		this.setImage(image);
-		this.setView();
+		
 		timer.schedule(new TimerTask(){
 			@Override
 			public void run(){
