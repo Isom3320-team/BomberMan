@@ -24,12 +24,7 @@ public void drawpanel(GraphicsContext gc) {
 		game.getPlayer().paint(getGraphicsContext2D());
 		
 		for (int i = 0; i < game.getBombArray().size(); i++) {
-			if(!game.getBombArray().get(i).isDead()){
 			game.getBombArray().get(i).paint(gc);
-			}else {
-				pm.explodeBomb(i);
-				pm.explosionDetector();
-			}
 		}
 		
 		for (int i = 0; i < game.getWallArray().size(); i++) {
@@ -123,52 +118,6 @@ public void drawpanel(GraphicsContext gc) {
 	   	default:
 	   		break;
 	   	}
-		
-	}
-
-	@Override
-	public void clear(GraphicsContext gc) {
-		if (game.getPlayer().isDead()){
-		  //game.getPlayer().clear(getGraphicsContext2D());
-		}
-		for (int i = 0; i < game.getBombArray().size(); i++) {
-			if(game.getBombArray().get(i).isDead()){
-				game.getBombArray().get(i).clear(gc);
-				game.removeBomb(i);
-			}
-		}
-		
-		for (int i = 0; i < game.getWallArray().size(); i++) {
-			if(game.getWallArray().get(i).isDead()){
-			game.getWallArray().get(i).clear(gc);
-			game.removeWall(i);
-			}
-		}
-		
-		
-		for (int i = 0; i < game.getEnemyArray().size(); i++) {
-			if(game.getEnemyArray().get(i).isDead()){
-			game.getEnemyArray().get(i).clear(gc);
-			game.removeEnemy(i);
-			}
-		}
-		
-		for (int i = 0; i < game.getItemArray().size(); i++) {
-			if(game.getItemArray().get(i).isDead()){
-			game.getItemArray().get(i).clear(gc);
-			game.removeItem(i);
-			}
-			
-		}
-		
-		for (int i = 0; i < game.getExplosionArray().size(); i++) {
-			
-			if(game.getExplosionArray().get(i).isDead()){
-				game.getExplosionArray().get(i).clear(gc);
-				game.getExplosionArray().remove(i);
-			
-			}
-		}
 		
 	}
 

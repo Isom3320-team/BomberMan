@@ -4,8 +4,6 @@ import java.util.TimerTask;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import System.Explosion;
-import System.PhysicsManager;
 
 public class Bomb extends NonLivingObj implements Killable {
 	
@@ -15,7 +13,7 @@ public class Bomb extends NonLivingObj implements Killable {
 	
 	public Bomb(int x, int y) {
 		super(x, y);
-		lifeTime = 2000;
+		lifeTime = 5000;
 		Image image = new Image("Image/baozou.png", 32.0, 32.0, false, true);
 		this.setImage(image);
 		timer.schedule(new TimerTask(){

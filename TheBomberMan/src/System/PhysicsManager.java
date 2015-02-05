@@ -92,7 +92,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 			
 			if (type == CollisionType.OVERLAP) {
-				if (unit1.getX() == unit2.getX() && unit2.getY() == unit1.getY()){
+				if (unit1.getX() == unit2.getY() && unit2.getY() == unit1.getY()){
 					return true;
 				}
 			}
@@ -102,27 +102,24 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 		
 	public static boolean canMove(Units unit1, CollisionType type) {
-			if (!(unit1 instanceof Explosion)||!(unit1 instanceof FlyMinion)){
-				
+			
 			for(int i=0; i < game.getWallArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getWallArray().get(i),type))
 					{System.out.print("colision with wall");
 						return false;}
 				}
-			}
 			
 			for(int i=0; i < game.getRockArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getRockArray().get(i),type)){
 					System.out.print("colision with raock");
 						return false;}
 				}
-			if (!(unit1 instanceof Explosion)){
+			
 			if (unit1 instanceof Enemy) {
 			for(int i=0; i < game.getEnemyArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getEnemyArray().get(i),type))
 						return false;
 				}
-			}
 			}
 			
 			if (!(unit1 instanceof Bomb)) {
@@ -205,22 +202,19 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				if (CollisionDetector(game.getExplosionArray().get(i), game.getWallArray()
 						.get(j), CollisionType.OVERLAP)) {
 					game.getWallArray().get(j).die();
-					}
-				
+				}
 			}
 
 			for (int j = 0; j < game.getEnemyArray().size(); j++) {
 				if (CollisionDetector(game.getExplosionArray().get(i), game
 								.getEnemyArray().get(j), CollisionType.OVERLAP)) {
 					game.getEnemyArray().get(j).die();
-					System.out.print("enenmy dead");
 				}
 			}
 
 
 			if (CollisionDetector(game.getExplosionArray().get(i), game.getPlayer(), CollisionType.OVERLAP)) {
 				game.getPlayer().die();
-				System.out.print("player dead");
 			}
 			
 		}
@@ -281,14 +275,14 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				int playerBlastRadius = 2; //bombX.ItemType ??? + set ItemType --> Range of the blast
 				int bossBlastRadius = 2; //bombX.Type ???
 
-				
+
 				// adds explosion outwards 
 				for (int i = 0; i < (game.getBombArray().get(bombX).getbossBomb() ? bossBlastRadius
 						: playerBlastRadius); i++) {
 
 					// up
 					Explosion up = new Explosion(originX,originY-i*inc); 
-					
+		
 					
 					if (canExpUp) {
 						if (game.getBombArray().get(bombX).isBossBomb()) {
@@ -303,7 +297,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 					// down
 					Explosion down = new Explosion(originX,originY+i*inc); 
-					
+
 					if (canExpDown) {
 						if (game.getBombArray().get(bombX).isBossBomb()) {
 							down.setBossExplosion(true);
