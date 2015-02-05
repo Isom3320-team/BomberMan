@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public  class GameApplication extends Application{
-	protected Group mGroup;
+	protected static Group mGroup;
 	protected Scene mScene;
     protected GameStatus game ;
     protected PhysicsManager pm;
@@ -44,7 +44,7 @@ public  class GameApplication extends Application{
 		return mScene;
 	}
 	
-	protected Group getRoot(){
+	protected static Group getRoot(){
 		return mGroup;
 	}
 	

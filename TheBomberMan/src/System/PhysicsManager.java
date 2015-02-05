@@ -40,14 +40,12 @@ public  class  PhysicsManager implements Runnable{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					checkGameOver();
-
 					if (!game.isGameOver()) {
-						winning();
+						//winning();
 						explosionDetector();
 						itemPickUp();
-
 					}
-					removeCorpse();
+					//removeCorpse();
 
 				}
 
@@ -201,6 +199,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			if (CollisionDetector(game.getPlayer(), game.getItemArray().get(i),
 					CollisionType.OVERLAP)) {
 				game.getPlayer().consume(game.getItemArray().get(i));
+				System.out.print("consume item");
 				game.removeItem(i);
 			}
 		}
@@ -284,22 +283,17 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				boolean canExpRight = true;
 				int originX = game.getBombArray().get(bombX).getX();
 				int originY = game.getBombArray().get(bombX).getY();
-				int playerBlastRadius = 2; //bombX.ItemType ??? + set ItemType --> Range of the blast
-				int bossBlastRadius = 2; //bombX.Type ???
+				int playerBlastRadius = game.getPlayer().getBombRadius(); //bombX.ItemType ??? + set ItemType --> Range of the blast
 
 				
 				// adds explosion outwards 
-				for (int i = 0; i < (game.getBombArray().get(bombX).getbossBomb() ? bossBlastRadius
-						: playerBlastRadius); i++) {
+				for (int i = 0; i < playerBlastRadius; i++) {
 
 					// up
 					Explosion up = new Explosion(originX,originY-i*inc); 
 					
 					
 					if (canExpUp) {
-						if (game.getBombArray().get(bombX).isBossBomb()) {
-							up.setBossExplosion(true);
-						}
 						game.addExplosion(up);
 					}
 
@@ -311,9 +305,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 					Explosion down = new Explosion(originX,originY+i*inc); 
 					
 					if (canExpDown) {
-						if (game.getBombArray().get(bombX).isBossBomb()) {
-							down.setBossExplosion(true);
-						}
+						
 						game.addExplosion(down);
 					}
 
@@ -325,9 +317,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 					Explosion left = new Explosion(originX-i*inc,originY); 
 
 					if (canExpLeft) {
-						if (game.getBombArray().get(bombX).isBossBomb()) {
-							left.setBossExplosion(true);
-						}
+						
 						game.addExplosion(left);
 					}
 
@@ -339,9 +329,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 					Explosion right = new Explosion(originX+i*inc ,originY); 
 
 					if (canExpRight) {
-						if (game.getBombArray().get(bombX).isBossBomb()) {
-							right.setBossExplosion(true);
-						}
+						
 						game.addExplosion(right);
 					}
 
@@ -378,7 +366,6 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		}
 
-		
 	}
 
 	public void winning() {

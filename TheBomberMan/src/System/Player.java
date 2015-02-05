@@ -6,7 +6,7 @@ import System.Item.ItemType;
 import javafx.scene.image.Image;
 
 public class Player extends LivingObj{
-	private int score, level, lives,maxBomb, bombRadius, blastRadius, speed; //What are these unused variables?
+	private int score, level, lives,maxBomb, blastRadius, speed; //What are these unused variables?
 	private boolean godmode, isAlive; 
 	private String name;
 	private boolean isActivePlayer;
@@ -47,11 +47,11 @@ public class Player extends LivingObj{
 	}
 	
 	public int getBombRadius(){
-		return bombRadius;
+		return blastRadius;
 	}
 	
 	public void setBombRadius(int br){
-		this.bombRadius = br;
+		this.blastRadius = br;
 	}
 	
 	public int getScore(){
@@ -70,13 +70,11 @@ public class Player extends LivingObj{
 	 */
 	
 	public void consume(Item item){
-		// to do: get the Item type and add attributes to the player
+		
 		if(item.gettype() == ItemType.BLAST){
-			this.blastRadius+=5;// to decide how much to increase 
-		}else if (item.gettype() == ItemType.BOMB){
-			this.maxBomb++;
+			this.blastRadius+=1;
 		}else{
-			this.speed+=4;// to decide how much to increase
+			this.maxBomb++;
 		}
 	}
 	

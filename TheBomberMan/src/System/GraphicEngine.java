@@ -8,12 +8,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import panel.GraphicPanel;
 import panel.GameApplication;
+import panel.MainMenuPanel;
 import panel.Window;
 import panel.InGamePanel;
 
 public class GraphicEngine extends GameApplication implements Runnable {
 	
-	protected InGamePanel inGamePanel;
+	//protected InGamePanel inGamePanel;
 	
 	public GraphicEngine(){
 		game = new GameStatus();
@@ -33,13 +34,20 @@ public class GraphicEngine extends GameApplication implements Runnable {
 
 	@Override
 	protected void loadEnd() {
-		
+		/*
 		inGamePanel = new InGamePanel(Window.WIDTH,Window.HEIGHT);
 		
 		getRoot().getChildren().add(inGamePanel);
 		inGamePanel.start();
 		inGamePanel.initEvents();
 		getScene().setFill(Color.rgb(128,128,128));
+		*/
+		
+		MainMenuPanel mainMenuPanel = new MainMenuPanel(Window.WIDTH, Window.HEIGHT);
+		getRoot().getChildren().add(mainMenuPanel);
+		getRoot().getChildren().add(mainMenuPanel.getButton());
+		mainMenuPanel.start();
+		
 	}
 	
 	public GameStatus getStatus(){

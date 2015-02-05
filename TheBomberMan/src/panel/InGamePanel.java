@@ -19,7 +19,7 @@ public class InGamePanel extends GraphicPanel  {
 	public InGamePanel(double width, double height) {
 		super(width, height);
 		this.game = new GameStatus();
-		this.mGameState= GamePanel.GAME_START;
+		//this.mGameState= GamePanel.GAME_START;
 		this.pm = new PhysicsManager(game);
 		
 		
@@ -29,7 +29,7 @@ public class InGamePanel extends GraphicPanel  {
 public void drawpanel(GraphicsContext gc) {
 		gc.clearRect(32, 32, 480, 352);
 		game.getPlayer().paint(getGraphicsContext2D());
-		
+
 		for (int i = 0; i < game.getBombArray().size(); i++) {
 			if(!game.getBombArray().get(i).isDead()){
 			game.getBombArray().get(i).paint(gc);
@@ -163,7 +163,7 @@ public void drawpanel(GraphicsContext gc) {
 		for (int i = 0; i < game.getItemArray().size(); i++) {
 			if(game.getItemArray().get(i).isDead()){
 			game.getItemArray().get(i).clear(gc);
-			game.removeItem(i);
+			//game.removeItem(i);
 			}
 			
 		}

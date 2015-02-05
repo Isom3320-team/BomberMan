@@ -10,26 +10,25 @@ public class Item extends NonLivingObj {
 	ItemType type;
 	
 	enum ItemType{
-		BLAST, BOMB ,SPEED;
+		BLAST, BOMB ;
 	}
 	
 	public Item(int x, int y) {
 		super(x, y);
-		Image image = new Image("Image/item 3.png", 32.0, 32.0, false, true);
+		Image image = new Image("Image/item 2.png", 32.0, 32.0, false, true);
 		this.setImage(image);
-		if (r.nextInt(100)<30){
+		if (r.nextInt(100)<50){
 			settype(ItemType.BLAST);
+			//this.setImage(new Image("Image/item.png", 32.0, 32.0, false, true));
 		}
-		else if ((r.nextInt(100)<70)&&(r.nextInt(100)>30)){
+		else {
 			settype(ItemType.BOMB);
-		}else{
-			settype(ItemType.SPEED);
+			//this.setImage(new Image("Image/item 2.png", 32.0, 32.0, false, true));
 		}
 	}
 	
 	public ItemType gettype(){
 		return type;
-		
 	}
 	public void settype(ItemType type){
 		this.type = type;

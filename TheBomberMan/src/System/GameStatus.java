@@ -115,19 +115,20 @@ public class GameStatus {
 		enemyArray = new ArrayList<Enemy>();
 		explosionArray = new ArrayList<Explosion>();
 		
-		int enemyCount;
-		int wallCount;
+		int enemyChance;
+		int wallChance;
+		int itemChance = 5;
 
 		if (lvl % 2 == 0) {
-			enemyCount = 10;
-			wallCount = 40;
+			enemyChance = 10;
+			wallChance = 40;
 		} else if (lvl % 3 == 0) {
-			enemyCount = 15;
-			wallCount = 30;
+			enemyChance = 15;
+			wallChance = 30;
 			enemyArray.add(new Boss(480,320));
 		} else {
-			enemyCount = 5;
-			wallCount = 40;
+			enemyChance = 5;
+			wallChance = 40;
 		}
 
 		for (int i = 0; i < fieldWidth; i += inc) {
@@ -143,10 +144,10 @@ public class GameStatus {
 				else if ((i > 3 * inc) || (j > 3 * inc) && i != 480
 						&& j != 320) {
 					// chance of softblock
-					if ((new Random().nextInt(100)) < wallCount) {
+					if ((new Random().nextInt(100)) < wallChance) {
 						wallArray.add(new Wall(i, j));
 						// chance of enemy
-					} else if ((new Random().nextInt(100)) < enemyCount) {
+					} else if ((new Random().nextInt(100)) < enemyChance) {
 
 						if (lvl % 2 == 0) { // every second level, add FlyMinions
 
@@ -155,6 +156,10 @@ public class GameStatus {
 							enemyArray.add(new Minion(i, j));
 
 						}
+					} else if ((new Random()).nextInt(100)< itemChance){
+						
+						itemArray.add(new Item(i,j));
+						
 					}
 				}
 			}
