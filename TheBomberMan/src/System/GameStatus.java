@@ -16,12 +16,11 @@ import System.Player;
 
 public class GameStatus {
 	
-	int fieldWidth = 512;
-	int fieldHeight = 384;
+	int fieldWidth = 544;
+	int fieldHeight = 416;
 	int inc = 32;
 	
 	private Player player;
-	private Bomb bomb;
 	private ArrayList<Wall> wallArray;
 	private ArrayList<Rock> rockArray;
 	private ArrayList<Enemy> enemyArray;
@@ -40,7 +39,7 @@ public class GameStatus {
 		bombArray= new ArrayList<Bomb>();
 		itemArray= new ArrayList<Item>();
 		explosionArray = new ArrayList<Explosion>();
-		InitializeGame(1);
+		InitializeGame(2);
 		gameOver = false;
 		
 	}
@@ -49,18 +48,10 @@ public class GameStatus {
 		return player;
 	}
 
-	public Bomb getBomb(){
-		if (!bombArray.isEmpty()){
-		int l = bombArray.lastIndexOf(bomb);
-		return bombArray.get(l);
-		}else{
-		return null;
-		}
-	}
+
 	
 	public void addBomb(){
-		bomb = new Bomb(player.getX() ,player.getY());
-		bombArray.add(bomb);
+		bombArray.add(new Bomb(player.getX() ,player.getY()));
 	}
 	
 	public void removeBomb(){
@@ -113,6 +104,7 @@ public class GameStatus {
 	}
 	public void removeWall(int index){
 		wallArray.remove(index);
+		System.out.print("this wall removed");
 	}
 
 	public void InitializeGame(int lvl){

@@ -21,8 +21,8 @@ public class Explosion extends NonLivingObj implements Killable {
 	
 	public Explosion(int x, int y) {
 		super(x, y);
-		lifeTime = 1000;
-		Image image = new Image("Image/explosion.png", 100.0, 100.0, false, true);
+		lifeTime = 500;
+		Image image = new Image("Image/explosion.png", 32.0, 32.0, false, true);
 		this.setImage(image);
 		
 		
