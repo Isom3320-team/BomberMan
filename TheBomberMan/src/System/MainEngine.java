@@ -11,8 +11,8 @@ import System.GraphicEngine;
 
 public class MainEngine extends Application  {
     public static Thread physicsThread;
-    static Thread graphicThread;
-    static Sound sound;
+    public  static Thread graphicThread;
+    public static Sound sound;
     
 
     public static void main(String[] args){

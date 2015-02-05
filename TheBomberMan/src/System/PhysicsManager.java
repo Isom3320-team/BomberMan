@@ -39,7 +39,12 @@ public  class  PhysicsManager implements Runnable{
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					checkGameOver();
+					try {
+						checkGameOver();
+					} catch (InterruptedException e1) {
+						
+						e1.printStackTrace();
+					}
 					if (!game.isGameOver()) {
 						winning();
 						explosionDetector();
@@ -224,10 +229,11 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				}
 			}
 
-
+		}
+		for (int i = 0; i < game.getExplosionArray().size(); i++) {
 			if (CollisionDetector(game.getExplosionArray().get(i), game.getPlayer(), CollisionType.OVERLAP)) {
 				game.getPlayer().die();
-				System.out.print("player dead");
+				break;
 			}
 			
 		}
@@ -375,17 +381,17 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 	public void winning() {
 		if (game.getEnemyArray().isEmpty()) {
-			game.removeAll();
 			MainEngine.levelUp(game);
 		}
 	}
 	
 	/* set
 	 */
-	public void checkGameOver() {
-		if ( game.isGameOver() == true) {
-			MainEngine.scoreCopy();
-			game.setGameOver(true);
+	public void checkGameOver() throws InterruptedException {
+		if (game.getPlayer().getLive()==0){
+		    game.setGameOver(true);
+		    
+			//MainEngine.scoreCopy();
 		}
 	}	 
 	

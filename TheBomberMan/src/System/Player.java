@@ -6,10 +6,10 @@ import System.Item.ItemType;
 import javafx.scene.image.Image;
 
 public class Player extends LivingObj{
-	private int score, level, lives,maxBomb, blastRadius, speed; //What are these unused variables?
-	private boolean godmode, isAlive; 
+	private int score, level, lives,maxBomb, blastRadius; //What are these unused variables?
+	private boolean godmode; 
 	private String name;
-	private boolean isActivePlayer;
+
 	
 	public Player(){
 		super(0, 0);
@@ -20,17 +20,16 @@ public class Player extends LivingObj{
 		
 		Image image = new Image("Image/player.png", 32, 32, false, true);
 		this.setImage(image);
-		lives = 3;
+		lives = 1;
 		maxBomb = 1;
 		blastRadius = 2;
 		level = 1;
-		isAlive = true;
 		godmode = false;
 		name = "Default Name ";// to do: prompt the use to input the name;
-		isActivePlayer = true;
+		
 	}
 	
-	public int giveLive(){
+	public int getLive(){
 		return lives;
 	}
 	
@@ -98,7 +97,14 @@ public class Player extends LivingObj{
 		if (!godmode) {
 			this.setDead(true);
 			setCoordinates(32, 32);
+			System.out.print(lives);
 			this.lives--;
+			System.out.print(lives);
+			
+			if(lives==0){
+			   this.setDead(true);
+		}
+			
 			this.maxBomb = 1;
 			this.blastRadius = 2;
 			this.godmode = true;
@@ -107,45 +113,11 @@ public class Player extends LivingObj{
 				public void run(){
 					godmode = false;
 				}
-			}, 1000);
+			}, 500);
+	
 		}
 		// to do: commit the score to the GameEngine;
 	}
-/*	
-	public void addPlayer(Player x) {
-		playerArray.add(x);
-	}
-	public void removePlayer(int number) {
-		playerArray.remove(number);
-	}
-	public ArrayList<Player> getPlayerArray() {
-		return playerArray;
-	}
-	public Player getActivePlayer() {
 
-		if (playerArray.get(1).isActivePlayer()) {
-			return playerArray.get(1);
-		} else {
-			return playerArray.get(0);
-		}
-	}
-	public boolean isActivePlayer() {
-		return isActivePlayer;
-	}
-	public void setActivePlayer(boolean isActivePlayer) {
-		this.isActivePlayer = isActivePlayer;
-	}
-	public void switchActivePlayers() {
-		if (playerArray.size() == 2) {
-
-			if (playerArray.get(0).isActivePlayer()) {
-				playerArray.get(0).setActivePlayer(false);
-				playerArray.get(1).setActivePlayer(true);
-			} else {
-				playerArray.get(0).setActivePlayer(true);
-				playerArray.get(1).setActivePlayer(false);
-			}
-		}
-	}*/
 	
 }

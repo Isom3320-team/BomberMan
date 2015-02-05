@@ -11,7 +11,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import System.CollisionType;
 import System.GameStatus;
+import System.GraphicEngine;
 import System.PhysicsManager;
+import System.Player;
 
 public class InGamePanel extends GraphicPanel  {
 	
@@ -20,7 +22,10 @@ public class InGamePanel extends GraphicPanel  {
 		super(width, height);
 		this.game = new GameStatus();
 		this.pm = new PhysicsManager(game);
-		
+		/*
+		this.game = GraphicEngine.getStatus();
+		this.pm = GraphicEngine.getManager();
+		*/
 		
 	}
 
@@ -134,8 +139,14 @@ public void drawpanel(GraphicsContext gc) {
 
 	@Override
 	public void clear(GraphicsContext gc) {
-		if (game.getPlayer().isDead()){
-		  //game.getPlayer().clear(getGraphicsContext2D());
+		if (game.isGameOver()){
+			GraphicEngine.getRoot().getChildren().clear();
+			game.removeAll();
+			this.stop();
+			game.InitializeGame(1);
+			GameOverPanel GameOverPanel = new GameOverPanel(Window.WIDTH, Window.HEIGHT);
+			GraphicEngine.getRoot().getChildren().add(GameOverPanel);
+			GraphicEngine.getRoot().getChildren().add(GameOverPanel.getRestartButton());
 		}
 		for (int i = 0; i < game.getBombArray().size(); i++) {
 			if(game.getBombArray().get(i).isDead()){

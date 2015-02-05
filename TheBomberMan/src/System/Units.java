@@ -10,7 +10,7 @@ public abstract class Units {
 	protected IntegerProperty yCoord = new SimpleIntegerProperty(0);
 	
 	private Image image;
-	private boolean isDead;
+	private boolean isDead = false;
 	
 	public Units(){
 		this.xCoord = new SimpleIntegerProperty(0);

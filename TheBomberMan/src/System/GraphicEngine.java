@@ -51,6 +51,7 @@ public class GraphicEngine extends GameApplication implements Runnable {
 		
 	}
 	
+	
 	public GameStatus getStatus(){
 		return game;
 	}
@@ -59,6 +60,7 @@ public class GraphicEngine extends GameApplication implements Runnable {
 	public void setStatus(GameStatus gs){
 		this.game = gs;
 	}
+
 
 
 	@Override

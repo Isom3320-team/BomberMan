@@ -107,12 +107,14 @@ public class GameStatus {
 		System.out.print("this wall removed");
 	}
 	public void removeAll(){
+		//player.setLives(3);
 		bombArray.clear();
 		wallArray.clear();
 		rockArray.clear();
 		itemArray.clear();
 		enemyArray.clear();
 		explosionArray.clear();
+		gameOver = false;
 	}
 	public void InitializeGame(int lvl){
 		bombArray = new ArrayList<Bomb>();
