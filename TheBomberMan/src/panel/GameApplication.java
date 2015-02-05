@@ -20,7 +20,6 @@ public  class GameApplication extends Application{
     
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		game = new GameStatus();
 		loadBefore();
 		mGroup= new Group();
 		mScene = new Scene(mGroup, Window.WIDTH, Window.HEIGHT);		

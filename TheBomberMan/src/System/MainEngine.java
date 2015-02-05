@@ -10,19 +10,26 @@ import javafx.stage.Stage;
 import System.GraphicEngine;
 
 public class MainEngine extends Application  {
-    static Thread physicsThread;
+    public static Thread physicsThread;
     static Thread graphicThread;
     static Sound sound;
+    
 
     public static void main(String[] args){
     	
     	GraphicEngine ge = new GraphicEngine();
 
     	PhysicsManager physicsM = new PhysicsManager(ge.getStatus());
-    	physicsThread = new Thread(physicsM);
+    	
     	graphicThread = new Thread(ge);
+    	physicsThread = new Thread(physicsM);
+    	try{
     	graphicThread.start();
-    	//physicsThread.start();
+    	physicsThread.start();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	
     	
 	}
 

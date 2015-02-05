@@ -39,7 +39,7 @@ public class GameStatus {
 		bombArray= new ArrayList<Bomb>();
 		itemArray= new ArrayList<Item>();
 		explosionArray = new ArrayList<Explosion>();
-		InitializeGame(2);
+		InitializeGame(1);
 		gameOver = false;
 		
 	}

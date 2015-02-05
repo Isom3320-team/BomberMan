@@ -25,12 +25,12 @@ import System.Wall;
 public  class  PhysicsManager implements Runnable{
 	static  int inc = 32;
 	static GameStatus game;
-	private GraphicsContext GraphicsContext;
 	
 	
 	public PhysicsManager(GameStatus game){ 
 		this.game = game;
 	}
+	
 	
 		@Override
 	public void run() {
@@ -59,7 +59,9 @@ public  class  PhysicsManager implements Runnable{
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					//moveEnemies();
+					
+					moveEnemies();
+					
 				}
 
 			};
@@ -229,7 +231,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			
 		}
 	}
-/*	public void enemyRandomWalk(Enemy en) {
+	public void enemyRandomWalk(Enemy en) {
 		
 		ArrayList<CollisionType> options = new ArrayList<CollisionType>();
 		
@@ -253,10 +255,8 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		if (options.size() > 0) {
 			CollisionType direction = options.get(new Random().nextInt(options.size()));
 			if (direction == CollisionType.UP) {
-				en.clear(GraphicsContext);
 				en.moveUp();
 			} else if (direction == CollisionType.DOWN) {
-				
 				en.moveDown();
 			} else if (direction == CollisionType.LEFT) {
 				en.moveLeft();
@@ -265,7 +265,6 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		}
 	}
-	
 	public void moveEnemies() {
 		//if (!MainEngine.isPaused) {
 			for (int i = 0; i < game.getEnemyArray().size(); i++) {
@@ -276,7 +275,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		//}
 	}
-*/
+
 	public void explodeBomb(int bombX) {
 
 				boolean canExpUp = true;
@@ -396,8 +395,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			game.setGameOver(true);
 		}
 	}	 
-	public void setGraphicsContext(GraphicsContext gc){
-		this.GraphicsContext = gc;
-	}
+	
+	
 		 
 }

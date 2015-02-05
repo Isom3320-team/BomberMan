@@ -19,9 +19,9 @@ import javafx.event.EventHandler;;
 public abstract class GraphicPanel extends Canvas {
 	protected enum GamePanel {GAME_MENU, GAME_START, GAME_CONTINUE, GAME_HELP, GAME_SET,GAME_EXIT,GAME_PAUSE};
 	protected GameStatus game ;
-	protected PhysicsManager pm;
+	public PhysicsManager pm;
 	private Timeline timeline;
-	private KeyFrame keyFrameForUpdate,keyFrameForEnmey;
+	private KeyFrame keyFrameForUpdate;
 	private int duration = 30;
     protected GamePanel mGameState = GamePanel.GAME_MENU;
     protected GraphicsContext gc = this.getGraphicsContext2D();
@@ -35,7 +35,6 @@ public abstract class GraphicPanel extends Canvas {
 	
 	public abstract void clear(GraphicsContext gc);
 	
-	public abstract void moveEnemies();
 	
 	public void initEvents(){
 		getParent().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -62,14 +61,8 @@ public abstract class GraphicPanel extends Canvas {
 				clear(gc);
 			}
 		});
-		keyFrameForEnmey = new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg1) {
-				moveEnemies();
-			}
-		});
 		
-		timeline.getKeyFrames().addAll(keyFrameForUpdate,keyFrameForEnmey);
+		timeline.getKeyFrames().add(keyFrameForUpdate);
 	}
 	
 	public void start(){

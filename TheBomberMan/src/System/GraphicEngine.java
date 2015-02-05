@@ -12,7 +12,8 @@ import panel.Window;
 import panel.InGamePanel;
 
 public class GraphicEngine extends GameApplication implements Runnable {
-	protected Thread physicsThread;
+	
+	protected InGamePanel inGamePanel;
 	
 	public GraphicEngine(){
 		game = new GameStatus();
@@ -27,17 +28,17 @@ public class GraphicEngine extends GameApplication implements Runnable {
 
 	@Override
 	protected void loadBefore() {
-		setWindowSize(800,600);
+		setWindowSize(544,416);
 	}
 
 	@Override
 	protected void loadEnd() {
 		
-		InGamePanel inGamePanel = new InGamePanel(Window.WIDTH,Window.HEIGHT);
+		inGamePanel = new InGamePanel(Window.WIDTH,Window.HEIGHT);
+		
 		getRoot().getChildren().add(inGamePanel);
 		inGamePanel.start();
 		inGamePanel.initEvents();
-		
 		getScene().setFill(Color.rgb(128,128,128));
 	}
 	
@@ -45,6 +46,7 @@ public class GraphicEngine extends GameApplication implements Runnable {
 		return game;
 	}
 	
+
 	public void setStatus(GameStatus gs){
 		this.game = gs;
 	}
@@ -53,6 +55,10 @@ public class GraphicEngine extends GameApplication implements Runnable {
 	@Override
 	public void run() {
 		launchGraphicEngine();
-		
 	}
+	
+	
+
+	
+	
 }
