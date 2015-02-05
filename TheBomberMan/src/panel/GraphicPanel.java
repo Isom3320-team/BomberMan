@@ -32,7 +32,7 @@ public abstract class GraphicPanel extends Canvas {
 	
 	public abstract void drawpanel(GraphicsContext gc);
 	
-	
+	public abstract void clear(GraphicsContext gc);
 	
 	public void initEvents(){
 		getParent().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -55,6 +55,7 @@ public abstract class GraphicPanel extends Canvas {
 			@Override
 			public void handle(ActionEvent arg0) {
 				drawpanel(gc);
+				clear(gc);
 			}
 		});
 		timeline.getKeyFrames().add(keyFrame);
