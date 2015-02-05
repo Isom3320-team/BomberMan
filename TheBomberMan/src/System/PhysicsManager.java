@@ -102,7 +102,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 		
 	public static boolean canMove(Units unit1, CollisionType type) {
-			if (!(unit1 instanceof Explosion)||!(unit1 instanceof FlyMinion)){
+			if (!(unit1 instanceof Explosion) && !(unit1 instanceof FlyMinion)){
 				
 			for(int i=0; i < game.getWallArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getWallArray().get(i),type))

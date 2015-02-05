@@ -26,7 +26,6 @@ public class GraphicEngine extends GameApplication {
 	@Override
 	protected void loadBefore() {
 		setWindowSize(800,600);
-		
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class GraphicEngine extends GameApplication {
 		inGamePanel.start();
 		inGamePanel.initEvents();
 		
-		getScene().setFill(Color.GREY);
+		getScene().setFill(Color.rgb(128,128,128));
 	}
 	
 	public GameStatus getStatus(){
