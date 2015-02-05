@@ -10,21 +10,24 @@ import javafx.stage.Stage;
 import System.GraphicEngine;
 
 public class MainEngine extends Application  {
-    public static GameStatus gs;
+    static Thread physicsThread;
     static Thread graphicThread;
     static Sound sound;
 
     public static void main(String[] args){
+    	
     	GraphicEngine ge = new GraphicEngine();
-    	ge.launchGraphicEngine();
+
+    	PhysicsManager physicsM = new PhysicsManager(ge.getStatus());
+    	physicsThread = new Thread(physicsM);
+    	graphicThread = new Thread(ge);
+    	graphicThread.start();
+    	//physicsThread.start();
     	
 	}
 
-	public GameStatus getGameStatus(){
-		return gs;
-	}
     
-	public static void levelUp() {
+	public static void levelUp(GameStatus gs) {
    		gs.getPlayer().setLevel(gs.getPlayer().getLevel() + 1);
    		gs.InitializeGame(gs.getPlayer().getLevel());
    		gs.getPlayer().setCoordinates(32, 32);
@@ -38,7 +41,7 @@ public class MainEngine extends Application  {
 					"src/scoreCopy.txt"));
 
 			
-			scoreCopy.write(gs.getPlayer().getScore());
+			//scoreCopy.write(gs.getPlayer().getScore());
 			
 
 			scoreCopy.close();
@@ -52,7 +55,7 @@ public class MainEngine extends Application  {
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
+		//
 		
 	}
 }

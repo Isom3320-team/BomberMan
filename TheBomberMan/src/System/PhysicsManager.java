@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import javax.swing.Timer;
 
 import System.CollisionType;
@@ -23,6 +25,8 @@ import System.Wall;
 public  class  PhysicsManager implements Runnable{
 	static  int inc = 32;
 	static GameStatus game;
+	private GraphicsContext GraphicsContext;
+	
 	
 	public PhysicsManager(GameStatus game){ 
 		this.game = game;
@@ -55,7 +59,7 @@ public  class  PhysicsManager implements Runnable{
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					moveEnemies();
+					//moveEnemies();
 				}
 
 			};
@@ -102,18 +106,22 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 		
 	public static boolean canMove(Units unit1, CollisionType type) {
-			if (!(unit1 instanceof Explosion)||!(unit1 instanceof FlyMinion)){
+<<<<<<< HEAD
+			if (!(unit1 instanceof Explosion)&&!(unit1 instanceof FlyMinion)){
+=======
+			if (!(unit1 instanceof Explosion) && !(unit1 instanceof FlyMinion)){
+>>>>>>> FETCH_HEAD
 				
 			for(int i=0; i < game.getWallArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getWallArray().get(i),type))
-					{System.out.print("colision with wall");
+					{
 						return false;}
 				}
 			}
 			
 			for(int i=0; i < game.getRockArray().size(); i++) {
 				if (CollisionDetector(unit1, game.getRockArray().get(i),type)){
-					System.out.print("colision with raock");
+					
 						return false;}
 				}
 			if (!(unit1 instanceof Explosion)){
@@ -225,9 +233,10 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			
 		}
 	}
-	public void enemyRandomWalk(Enemy en) {
+/*	public void enemyRandomWalk(Enemy en) {
+		
 		ArrayList<CollisionType> options = new ArrayList<CollisionType>();
-
+		
 		if (canMove(en, CollisionType.UP)) {
 			options.add(CollisionType.UP);
 		}
@@ -248,8 +257,10 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		if (options.size() > 0) {
 			CollisionType direction = options.get(new Random().nextInt(options.size()));
 			if (direction == CollisionType.UP) {
+				en.clear(GraphicsContext);
 				en.moveUp();
 			} else if (direction == CollisionType.DOWN) {
+				
 				en.moveDown();
 			} else if (direction == CollisionType.LEFT) {
 				en.moveLeft();
@@ -269,7 +280,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		//}
 	}
-
+*/
 	public void explodeBomb(int bombX) {
 
 				boolean canExpUp = true;
@@ -377,7 +388,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 	public void winning() {
 		if (game.getEnemyArray().isEmpty()) {
-			MainEngine.levelUp();
+			MainEngine.levelUp(game);
 		}
 	}
 
@@ -389,6 +400,8 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			game.setGameOver(true);
 		}
 	}	 
-
+	public void setGraphicsContext(GraphicsContext gc){
+		this.GraphicsContext = gc;
+	}
 		 
 }

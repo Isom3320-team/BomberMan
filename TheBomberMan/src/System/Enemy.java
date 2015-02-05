@@ -10,7 +10,8 @@ public class Enemy extends LivingObj {
 		this.setImage(image);
 		
 	}
-
+	
+	
 	@Override
 	public void die() {
 		setDead(true);

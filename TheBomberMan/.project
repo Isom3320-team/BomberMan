@@ -14,4 +14,36 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Image/bomb.png</name>
+			<type>1</type>
+			<location>/Users/jinzenan/Documents/BomberMan/TheBomberMan/src/Image/bomb.png</location>
+		</link>
+		<link>
+			<name>src/Image/explosion.png</name>
+			<type>1</type>
+			<location>/Users/jinzenan/Documents/BomberMan/TheBomberMan/src/Image/explosion.png</location>
+		</link>
+		<link>
+			<name>src/Image/minion.png</name>
+			<type>1</type>
+			<location>/Users/jinzenan/Documents/BomberMan/TheBomberMan/src/Image/minion.png</location>
+		</link>
+		<link>
+			<name>src/Image/player.png</name>
+			<type>1</type>
+			<location>/Users/jinzenan/Documents/BomberMan/TheBomberMan/src/Image/player.png</location>
+		</link>
+		<link>
+			<name>src/Image/rock.png</name>
+			<type>1</type>
+			<location>/Users/jinzenan/Documents/BomberMan/TheBomberMan/src/Image/rock.png</location>
+		</link>
+		<link>
+			<name>src/Image/wall.png</name>
+			<type>1</type>
+			<location>/Users/jinzenan/Documents/BomberMan/TheBomberMan/src/Image/wall.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

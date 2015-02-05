@@ -11,22 +11,23 @@ import panel.GameApplication;
 import panel.Window;
 import panel.InGamePanel;
 
-public class GraphicEngine extends GameApplication {
+public class GraphicEngine extends GameApplication implements Runnable {
+	protected Thread physicsThread;
 	
 	public GraphicEngine(){
 		game = new GameStatus();
-		pm = new PhysicsManager(game);
+		pm = new PhysicsManager(game); 
 	}
 	
 	
 	public void launchGraphicEngine(){
 		launch();
+		
 	}
 
 	@Override
 	protected void loadBefore() {
 		setWindowSize(800,600);
-		
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class GraphicEngine extends GameApplication {
 		inGamePanel.start();
 		inGamePanel.initEvents();
 		
-		getScene().setFill(Color.GREY);
+		getScene().setFill(Color.rgb(128,128,128));
 	}
 	
 	public GameStatus getStatus(){
@@ -46,5 +47,12 @@ public class GraphicEngine extends GameApplication {
 	
 	public void setStatus(GameStatus gs){
 		this.game = gs;
+	}
+
+
+	@Override
+	public void run() {
+		launchGraphicEngine();
+		
 	}
 }

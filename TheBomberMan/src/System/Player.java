@@ -18,7 +18,7 @@ public class Player extends LivingObj{
 	public Player(int x, int y) {
 		super(x, y);
 		
-		Image image = new Image("Image/baozou.png", 32, 32, false, true);
+		Image image = new Image("Image/player.png", 32, 32, false, true);
 		this.setImage(image);
 		lives = 3;
 		maxBomb = 1;

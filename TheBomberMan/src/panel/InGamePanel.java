@@ -1,9 +1,12 @@
 package panel;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 import System.CollisionType;
+import System.Enemy;
 import System.GameStatus;
 import System.PhysicsManager;
 
@@ -171,6 +174,55 @@ public void drawpanel(GraphicsContext gc) {
 		}
 		
 	}
+	
+public void enemyRandomWalk(Enemy en) {
+		
+		ArrayList<CollisionType> options = new ArrayList<CollisionType>();
+		
+		if (pm.canMove(en, CollisionType.UP)) {
+			options.add(CollisionType.UP);
+		}
 
+		if (pm.canMove(en, CollisionType.DOWN)) {
+			options.add(CollisionType.DOWN);
+		}
+
+		if (pm.canMove(en, CollisionType.LEFT)) {
+			options.add(CollisionType.LEFT);
+		}
+
+		if (pm.canMove(en, CollisionType.RIGHT)) {
+			options.add(CollisionType.RIGHT);
+		}
+
+		// chooses a direction to move in from options
+		if (options.size() > 0) {
+			CollisionType direction = options.get(new Random().nextInt(options.size()));
+			if (direction == CollisionType.UP) {
+				en.clear(gc);
+				en.moveUp();
+			} else if (direction == CollisionType.DOWN) {
+				en.clear(gc);
+				en.moveDown();
+			} else if (direction == CollisionType.LEFT) {
+				en.clear(gc);
+				en.moveLeft();
+			} else if (direction == CollisionType.RIGHT) {
+				en.clear(gc);
+				en.moveRight();
+			}
+		}
+	}
+	@Override
+	public void moveEnemies() {
+		//if (!MainEngine.isPaused) {
+			for (int i = 0; i < game.getEnemyArray().size(); i++) {
+				enemyRandomWalk(game.getEnemyArray().get(i));
+				if (pm.hitsPlayer(game.getEnemyArray().get(i))) {
+					game.getPlayer().die();
+				}
+			}
+		//}
+	}
 	
 }

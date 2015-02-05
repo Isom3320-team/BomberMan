@@ -9,6 +9,7 @@ import System.Units;
 import javafx.scene.canvas.*;
 import javafx.scene.input.KeyEvent;
 import javafx.animation.KeyFrame;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
 import javafx.util.Duration;
@@ -20,7 +21,7 @@ public abstract class GraphicPanel extends Canvas {
 	protected GameStatus game ;
 	protected PhysicsManager pm;
 	private Timeline timeline;
-	private KeyFrame keyFrame;
+	private KeyFrame keyFrameForUpdate,keyFrameForEnmey;
 	private int duration = 30;
     protected GamePanel mGameState = GamePanel.GAME_MENU;
     protected GraphicsContext gc = this.getGraphicsContext2D();
@@ -34,6 +35,8 @@ public abstract class GraphicPanel extends Canvas {
 	
 	public abstract void clear(GraphicsContext gc);
 	
+	public abstract void moveEnemies();
+	
 	public void initEvents(){
 		getParent().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -42,6 +45,7 @@ public abstract class GraphicPanel extends Canvas {
 				onKeyPressed(event);
 			}
 		});
+		
 	}
 	
 	protected abstract void onKeyPressed(KeyEvent event);
@@ -51,14 +55,21 @@ public abstract class GraphicPanel extends Canvas {
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
 
-		keyFrame = new KeyFrame(Duration.millis(duration), new EventHandler<ActionEvent>() {
+		keyFrameForUpdate = new KeyFrame(Duration.millis(duration), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				drawpanel(gc);
 				clear(gc);
 			}
 		});
-		timeline.getKeyFrames().add(keyFrame);
+		keyFrameForEnmey = new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg1) {
+				moveEnemies();
+			}
+		});
+		
+		timeline.getKeyFrames().addAll(keyFrameForUpdate,keyFrameForEnmey);
 	}
 	
 	public void start(){
