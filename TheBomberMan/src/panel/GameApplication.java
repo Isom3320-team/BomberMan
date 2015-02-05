@@ -6,11 +6,13 @@ import System.PhysicsManager;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public  class GameApplication extends Application{
 	protected static Group mGroup;
-	protected Scene mScene;
+	protected static Scene mScene;
+	protected static Pane mPane;
     protected GameStatus game ;
     protected PhysicsManager pm;
     
@@ -21,7 +23,8 @@ public  class GameApplication extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		loadBefore();
-		mGroup= new Group();
+		mPane = new Pane();
+		mGroup= new Group(mPane);
 		mScene = new Scene(mGroup, Window.WIDTH, Window.HEIGHT);		
 		loadEnd();
 		showStage(primaryStage);
@@ -40,15 +43,18 @@ public  class GameApplication extends Application{
 		stage.show();
 	}
 	
-	protected Scene getScene(){
+	
+	protected static Scene getScene(){
 		return mScene;
 	}
 	
-	protected static Group getRoot(){
-		return mGroup;
+	protected static Pane getRoot(){
+		return mPane;
 	}
 	
 	public void setWindowSize(int width, int height){
 		Window.init(width, height);
 	}
+	
+	
 }

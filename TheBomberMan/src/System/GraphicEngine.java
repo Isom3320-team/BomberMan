@@ -15,6 +15,7 @@ import panel.InGamePanel;
 public class GraphicEngine extends GameApplication implements Runnable {
 	
 	//protected InGamePanel inGamePanel;
+	//protected MainMenuPanel mainMenuPanel;
 	
 	public GraphicEngine(){
 		game = new GameStatus();
@@ -45,8 +46,8 @@ public class GraphicEngine extends GameApplication implements Runnable {
 		
 		MainMenuPanel mainMenuPanel = new MainMenuPanel(Window.WIDTH, Window.HEIGHT);
 		getRoot().getChildren().add(mainMenuPanel);
-		getRoot().getChildren().add(mainMenuPanel.getButton());
-		mainMenuPanel.start();
+		getRoot().getChildren().add(mainMenuPanel.getStartButton());
+		getRoot().getChildren().add(mainMenuPanel.getHelpButton());
 		
 	}
 	
@@ -64,8 +65,6 @@ public class GraphicEngine extends GameApplication implements Runnable {
 	public void run() {
 		launchGraphicEngine();
 	}
-	
-	
 
 	
 	

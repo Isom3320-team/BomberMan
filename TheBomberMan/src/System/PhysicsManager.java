@@ -41,11 +41,12 @@ public  class  PhysicsManager implements Runnable{
 				public void actionPerformed(ActionEvent e) {
 					checkGameOver();
 					if (!game.isGameOver()) {
-						//winning();
+						winning();
 						explosionDetector();
 						itemPickUp();
+						
 					}
-					//removeCorpse();
+					
 
 				}
 
@@ -205,7 +206,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		}
 	}
 	public void explosionDetector() {
-		for (int i = 0; i < game.getExplosionArray().size(); i++) {
+		try{for (int i = 0; i < game.getExplosionArray().size(); i++) {
 			for (int j = 0; j < game.getWallArray().size(); j++) {
 				if (CollisionDetector(game.getExplosionArray().get(i), game.getWallArray()
 						.get(j), CollisionType.OVERLAP)) {
@@ -218,6 +219,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				if (CollisionDetector(game.getExplosionArray().get(i), game
 								.getEnemyArray().get(j), CollisionType.OVERLAP)) {
 					game.getEnemyArray().get(j).die();
+					
 					System.out.print("enenmy dead");
 				}
 			}
@@ -228,6 +230,9 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				System.out.print("player dead");
 			}
 			
+		}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	public void enemyRandomWalk(Enemy en) {
@@ -370,10 +375,11 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 	public void winning() {
 		if (game.getEnemyArray().isEmpty()) {
+			game.removeAll();
 			MainEngine.levelUp(game);
 		}
 	}
-
+	
 	/* set
 	 */
 	public void checkGameOver() {

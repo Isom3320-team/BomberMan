@@ -33,13 +33,11 @@ public class MainEngine extends Application  {
     	
 	}
 
-    
-	public static void levelUp(GameStatus gs) {
-   		gs.getPlayer().setLevel(gs.getPlayer().getLevel() + 1);
-   		gs.InitializeGame(gs.getPlayer().getLevel());
-   		gs.getPlayer().setCoordinates(32, 32);
-   		sound.playSound("/image/levelup.wav", false);
-   		gs.getPlayer().setScore(gs.getPlayer().getScore()+500 );
+    public static void levelUp(GameStatus game) {
+   		game.getPlayer().setLevel(game.getPlayer().getLevel() + 1);
+   		game.InitializeGame(game.getPlayer().getLevel());
+   		game.getPlayer().setCoordinates(32, 32);
+   		game.getPlayer().setScore(game.getPlayer().getScore()+500 );
    	}
    	
 	public static void scoreCopy() {

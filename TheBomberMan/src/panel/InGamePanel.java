@@ -19,7 +19,6 @@ public class InGamePanel extends GraphicPanel  {
 	public InGamePanel(double width, double height) {
 		super(width, height);
 		this.game = new GameStatus();
-		//this.mGameState= GamePanel.GAME_START;
 		this.pm = new PhysicsManager(game);
 		
 		
@@ -163,7 +162,7 @@ public void drawpanel(GraphicsContext gc) {
 		for (int i = 0; i < game.getItemArray().size(); i++) {
 			if(game.getItemArray().get(i).isDead()){
 			game.getItemArray().get(i).clear(gc);
-			//game.removeItem(i);
+			game.removeItem(i);
 			}
 			
 		}

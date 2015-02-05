@@ -39,7 +39,7 @@ public class GameStatus {
 		bombArray= new ArrayList<Bomb>();
 		itemArray= new ArrayList<Item>();
 		explosionArray = new ArrayList<Explosion>();
-		InitializeGame(1);
+		InitializeGame(2);
 		gameOver = false;
 		
 	}
@@ -106,7 +106,14 @@ public class GameStatus {
 		wallArray.remove(index);
 		System.out.print("this wall removed");
 	}
-
+	public void removeAll(){
+		bombArray.clear();
+		wallArray.clear();
+		rockArray.clear();
+		itemArray.clear();
+		enemyArray.clear();
+		explosionArray.clear();
+	}
 	public void InitializeGame(int lvl){
 		bombArray = new ArrayList<Bomb>();
 		wallArray = new ArrayList<Wall>();
@@ -120,10 +127,10 @@ public class GameStatus {
 		int itemChance = 5;
 
 		if (lvl % 2 == 0) {
-			enemyChance = 10;
+			enemyChance = 5;
 			wallChance = 40;
 		} else if (lvl % 3 == 0) {
-			enemyChance = 15;
+			enemyChance = 10;
 			wallChance = 30;
 			enemyArray.add(new Boss(480,320));
 		} else {

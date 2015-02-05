@@ -15,15 +15,13 @@ public class Item extends NonLivingObj {
 	
 	public Item(int x, int y) {
 		super(x, y);
-		Image image = new Image("Image/item 2.png", 32.0, 32.0, false, true);
-		this.setImage(image);
 		if (r.nextInt(100)<50){
 			settype(ItemType.BLAST);
-			//this.setImage(new Image("Image/item.png", 32.0, 32.0, false, true));
+			this.setImage(new Image("Image/item 1.png", 32.0, 32.0, false, true));
 		}
 		else {
 			settype(ItemType.BOMB);
-			//this.setImage(new Image("Image/item 2.png", 32.0, 32.0, false, true));
+			this.setImage(new Image("Image/item 2.png", 32.0, 32.0, false, true));
 		}
 	}
 	
