@@ -3,11 +3,8 @@ package System;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import System.Bomb;
 import System.Boss;
-import System.Difficulty;
 import System.Enemy;
 import System.Explosion;
 import System.FlyMinion;
@@ -31,9 +28,11 @@ public class GameStatus {
 	private ArrayList<Explosion> explosionArray;
 	private ArrayList<Boss> bossArray;
 	private ArrayList<String> scoreArray; 
-	private ArrayList<String> recordScore;
+	
 	private String Score = "0";
 	private boolean gameOver;
+	
+	
 	
 	
 	public GameStatus(){
@@ -46,8 +45,6 @@ public class GameStatus {
 		explosionArray = new ArrayList<Explosion>();
 		InitializeGame(1);
 		scoreArray = new ArrayList<String>();
-		recordScore = new ArrayList<String>();
-		recordScore = MainEngine.loadScores();
 		gameOver = false;
 		
 	}
@@ -63,6 +60,7 @@ public class GameStatus {
 	
 	public void setScore(){
 		Score=String.valueOf(scoreArray.size());
+		
 	}
 	public String getScore(){
 		return Score;
@@ -89,11 +87,7 @@ public class GameStatus {
 	public void addExplosion(Explosion x) {
 		explosionArray.add(x);
 	}
-	
-	public ArrayList<String> getrecordScore(){
-		return recordScore;
-	}
-	
+
 	public ArrayList<Item> getItemArray(){
 		return itemArray;
 	}
@@ -103,7 +97,7 @@ public class GameStatus {
 	}
 	
 	public ArrayList<Bomb> getBombArray() {
-		return bombArray; // Can be used either for Boss AND Player
+		return bombArray; 
 	}
 	
 	public ArrayList<Wall> getWallArray() {
@@ -205,7 +199,7 @@ public class GameStatus {
 	}
 
 	public void setGameOver(boolean gameOver) {
-		recordScore.add(Score);
+		MainEngine.addToRecord(Integer.valueOf(Score));
 		this.gameOver = gameOver;
 	}
 }

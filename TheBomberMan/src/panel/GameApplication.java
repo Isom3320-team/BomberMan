@@ -1,10 +1,6 @@
 package panel;
 
-import java.util.Optional;
-
-
 import System.GameStatus;
-import System.GraphicEngine;
 import System.PhysicsManager;
 import javafx.application.Application;
 import javafx.scene.Group;

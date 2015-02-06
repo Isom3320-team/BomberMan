@@ -17,7 +17,6 @@ import javafx.scene.image.ImageView;
 public class Explosion extends NonLivingObj implements Killable {
 	private int lifeTime;
 	private Timer timer = new Timer();
-	private boolean bossExplosion = false;
 	
 	public Explosion(int x, int y) {
 		super(x, y);
@@ -40,17 +39,6 @@ public class Explosion extends NonLivingObj implements Killable {
 	public void die() {
 		this.setDead(true);
 		this.timer.cancel();
-	}
-
-
-
-
-	
-	public void setBossExplosion(boolean bossBomb){
-		this.bossExplosion = bossBomb;
-	}
-	public boolean getBossExplosion(){
-		return bossExplosion;
 	}
 }
 

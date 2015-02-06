@@ -1,29 +1,21 @@
 package panel;
-import java.util.ArrayList;
-import java.util.List;
 
 import System.GameStatus;
 import System.PhysicsManager;
-import System.Player;
-import System.Units;
 import javafx.scene.canvas.*;
 import javafx.scene.input.KeyEvent;
 import javafx.animation.KeyFrame;
-import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
-import javafx.beans.property.*;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;;
 
 public abstract class GraphicPanel extends Canvas {
-	protected enum GamePanel {GAME_MENU, GAME_START, GAME_CONTINUE, GAME_HELP, GAME_SET,GAME_EXIT,GAME_PAUSE};
 	protected GameStatus game ;
 	public PhysicsManager pm;
 	private Timeline timeline;
 	private KeyFrame keyFrameForUpdate;
 	private int duration = 30;
-    protected GamePanel mGameState = GamePanel.GAME_MENU;
     protected GraphicsContext gc = this.getGraphicsContext2D();
 	
 	public GraphicPanel(double width, double height){

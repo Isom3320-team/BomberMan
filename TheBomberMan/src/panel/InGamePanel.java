@@ -1,22 +1,13 @@
 package panel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-
-import javax.swing.Timer;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import System.CollisionType;
 import System.GameStatus;
 import System.GraphicEngine;
 import System.MainEngine;
 import System.PhysicsManager;
-import System.Player;
 
 public class InGamePanel extends GraphicPanel  {
 	
@@ -25,10 +16,6 @@ public class InGamePanel extends GraphicPanel  {
 		super(width, height);
 		this.game = new GameStatus();
 		this.pm = new PhysicsManager(game);
-		/*
-		this.game = GraphicEngine.getStatus();
-		this.pm = GraphicEngine.getManager();
-		*/
 		
 	}
 
@@ -72,21 +59,21 @@ public void drawpanel(GraphicsContext gc) {
 	       switch (event.getCode()) {
 	   	case UP:
 	   		if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.UP)) {
-	   			System.out.println("can move");
+	   			
 	   			this.game.getPlayer().clear(gc);
 	   			this.game.getPlayer().moveUp();
 	   			if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 	   				game.getPlayer().die();
 	   			}
 	   		}else{
-	   			System.out.println("cannotmove");
+	   			
 	   			
 	   			break;
 	   		}
 	   		break;
 	   	case DOWN:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.DOWN)) {
-				System.out.println("can move");
+				
 				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveDown();
 				if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
@@ -94,41 +81,41 @@ public void drawpanel(GraphicsContext gc) {
 				}
 				
 			}else{
-				System.out.println("cannotmove");
+				
 				break;
 			}
 	   		break;
 	   	case LEFT:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.LEFT)) {
-				System.out.println("can move");
+				
 				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveLeft();
 				if (pm.hitsEnemy(game.getPlayer(), CollisionType.OVERLAP)) {
 					game.getPlayer().die();
 				}
 			}else{
-				System.out.println("cannotmove");
+				
 				
 				break;
 			}
 	   		break;
 	   	case RIGHT:
 			if (game.getPlayer() != null && pm.canMove(game.getPlayer(), CollisionType.RIGHT)) {
-				System.out.println("can move");
+				
 				this.game.getPlayer().clear(gc);
 				this.game.getPlayer().moveRight();
 				if (pm.hitsEnemy(game.getPlayer(),  CollisionType.OVERLAP)) {
 					game.getPlayer().die();
 				}
 			}else{
-				System.out.println("cannotmove");
+				
 				
 				break;
 			}
 	   		break;
 	   	case SPACE:
 			if (game.getPlayer() != null&& pm.canPlaceBomb(game.getPlayer())) {
-				System.out.println("can place");
+				
 				this.game.addBomb();
 			}else{
 				break;
@@ -189,20 +176,19 @@ public void drawpanel(GraphicsContext gc) {
 			
 			}
 		}
-		game.setScore();
-		Collections.sort(game.getrecordScore());
-		gc.fillText("HighScore", 12 , 16);
 		
-		for(int i= game.getrecordScore().size()-1, j =1 ;i>game.getrecordScore().size()-4;i--,j++){
-			
-			gc.fillText(game.getrecordScore().get(i), 12, j*32);
-			
-			}
+		game.setScore();
+		gc.fillText("HighScore", 12 , 16);
 		gc.fillText("Score", 100, 16);
 		gc.strokeText(game.getScore(), 160, 16);
 		
+		String[] recordCopy = new String[3];
+		recordCopy = MainEngine.getRecord();
 		
-		
+		for(int i = 0; i<3; i++){
+			
+			gc.fillText(recordCopy[i], 12, (i+1)*32);
+		}
 	}
 
 	

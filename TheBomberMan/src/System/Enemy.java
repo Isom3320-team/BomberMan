@@ -3,8 +3,7 @@ package System;
 import javafx.scene.image.Image;
 
 public class Enemy extends LivingObj {
-	
-	private boolean isUpdated = false;
+
 	
 	public Enemy(int x, int y) {
 		super(x, y);
@@ -19,32 +18,6 @@ public class Enemy extends LivingObj {
 		setDead(true);
 		
 	}
-	
-	/*@Override
-	public void moveUp(){
-		
-		
-	}
-	
-	@Override
-	public void moveDown(){
-		
-		
-	}
-	@Override
-	public void moveLeft(){
-		
-		
-	}
-	@Override
-	public void moveRight(){
-		
-		
-	}
-	public void clearPath() {
-		
-		
-	}*/
 	
 
 }

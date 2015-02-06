@@ -14,7 +14,6 @@ import System.FlyMinion;
 import System.LivingObj;
 import System.Units;
 import System.Bomb;
-import System.Difficulty;
 import System.Enemy;
 import System.Explosion;
 import System.Rock;
@@ -35,7 +34,7 @@ public  class  PhysicsManager implements Runnable{
 	
 		@Override
 	public void run() {
-			//just have to check how to make the ActionEvent run 
+
 			ActionListener listener = new ActionListener() {
 
 				@Override
@@ -74,8 +73,7 @@ public  class  PhysicsManager implements Runnable{
 			timer2.start();
 		
 			}
-		// to do : in the detector we need to use switch to distinguish different type of collision
-		// this is useful and can save time
+		
 public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType type) {
 			
 			if (type == CollisionType.UP) {
@@ -170,18 +168,10 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 						return false;
 					}
 				
-
-			int playerBombs = 0;
-			if(unit1 instanceof Player) {
-				for (int i = 0; i < game.getBombArray().size(); i++) {
-					if (!game.getBombArray().get(i).getbossBomb()) {
-						playerBombs++;
-					}
-				}
-				if (((Player) unit1).getMaxBomb() == playerBombs) {
+				if (((Player) unit1).getMaxBomb() == game.getBombArray().size()) {
 				return false;
 				}
-			}	
+			
 		return true;
 		} 
 		 
@@ -206,7 +196,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			if (CollisionDetector(game.getPlayer(), game.getItemArray().get(i),
 					CollisionType.OVERLAP)) {
 				game.getPlayer().consume(game.getItemArray().get(i));
-				System.out.print("consume item");
+				
 				game.removeItem(i);
 			}
 		}
@@ -226,7 +216,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 								.getEnemyArray().get(j), CollisionType.OVERLAP)) {
 					game.getEnemyArray().get(j).die();
 					
-					System.out.print("enenmy dead");
+					
 				}
 			}
 
@@ -277,14 +267,13 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		}
 	}
 	public void moveEnemies() {
-		//if (!MainEngine.isPaused) {
+
 			for (int i = 0; i < game.getEnemyArray().size(); i++) {
 				enemyRandomWalk(game.getEnemyArray().get(i));
 				if (hitsPlayer(game.getEnemyArray().get(i))) {
 					game.getPlayer().die();
 				}
 			}
-		//}
 	}
 
 	public void explodeBomb(int bombX) {
@@ -298,7 +287,6 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				int playerBlastRadius = game.getPlayer().getBombRadius(); //bombX.ItemType ??? + set ItemType --> Range of the blast
 
 				
-				// adds explosion outwards 
 				for (int i = 0; i < playerBlastRadius; i++) {
 
 					// up
@@ -351,9 +339,10 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 				}
 
-				game.removeBomb(bombX);// change the remove method in the gamestatus 
+				game.removeBomb(bombX);
 			}
-	public void removeCorpse() { //trigger explodeBombs
+	
+	public void removeCorpse() {
 		for (int i = 0; i < game.getBombArray().size(); i++) {
 			if (game.getBombArray().get(i).isDead()) {
 				explodeBomb(i);
@@ -385,9 +374,7 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			MainEngine.levelUp(game);
 		}
 	}
-	
-	/* set
-	 */
+
 	public void checkGameOver() throws InterruptedException {
 		if (!game.isGameOver()&&!timer2.isRunning()){
 			timer2.start();
@@ -395,9 +382,6 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		if (game.getPlayer().getLive()==0){
 		    game.setGameOver(true);
 		    timer2.stop();
-		    if((Integer.valueOf(game.getScore())!= 0)){
-		    MainEngine.scoreCopy(game.getScore());
-		    }
 		}
 	}	 
 	

@@ -23,7 +23,6 @@ public class GameOverPanel extends Canvas{
 			
 			@Override
 			public void handle(ActionEvent arg0){
-				System.out.print("cleared and clicked");
 				GraphicEngine.getRoot().getChildren().clear();
 				
 				MainMenuPanel mainMenuPanel = new MainMenuPanel(Window.WIDTH, Window.HEIGHT);
