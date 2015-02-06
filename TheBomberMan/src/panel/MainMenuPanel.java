@@ -1,14 +1,20 @@
 package panel;
 
+
+import java.util.Optional;
+
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import System.GraphicEngine;
+import javafx.stage.*;
 
 public class MainMenuPanel extends GraphicPanel{
 	Image image = new Image("Image/StartGame.png", 544.0, 416.0, false, true);
@@ -47,9 +53,11 @@ public class MainMenuPanel extends GraphicPanel{
 				GraphicEngine.getRoot().getChildren().clear();
 				InGamePanel inGamePanel = new InGamePanel(Window.WIDTH, Window.HEIGHT);
 				GraphicEngine.getRoot().getChildren().add(inGamePanel);
+                
 				inGamePanel.start();
 				inGamePanel.initEvents();
 				GraphicEngine.getScene().setFill(Color.rgb(128,128,128));
+				;
 				
 			}
 			

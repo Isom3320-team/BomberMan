@@ -3,6 +3,8 @@ package System;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import System.Bomb;
 import System.Boss;
 import System.Difficulty;
@@ -28,6 +30,9 @@ public class GameStatus {
 	private ArrayList<Item> itemArray;
 	private ArrayList<Explosion> explosionArray;
 	private ArrayList<Boss> bossArray;
+	private ArrayList<String> scoreArray; 
+	private ArrayList<String> recordScore;
+	private String Score = "0";
 	private boolean gameOver;
 	
 	
@@ -39,7 +44,10 @@ public class GameStatus {
 		bombArray= new ArrayList<Bomb>();
 		itemArray= new ArrayList<Item>();
 		explosionArray = new ArrayList<Explosion>();
-		InitializeGame(2);
+		InitializeGame(1);
+		scoreArray = new ArrayList<String>();
+		recordScore = new ArrayList<String>();
+		recordScore = MainEngine.loadScores();
 		gameOver = false;
 		
 	}
@@ -47,8 +55,18 @@ public class GameStatus {
 	public Player getPlayer(){
 		return player;
 	}
-
-
+	public void addScore(int score){
+		for (int i=0; i<score; i++){
+		   scoreArray.add("+1");
+		}
+	}
+	
+	public void setScore(){
+		Score=String.valueOf(scoreArray.size());
+	}
+	public String getScore(){
+		return Score;
+	}
 	
 	public void addBomb(){
 		bombArray.add(new Bomb(player.getX() ,player.getY()));
@@ -65,10 +83,15 @@ public class GameStatus {
 
 	public void removeItem(int index){
 		itemArray.remove(index);
+		addScore(5);
 	}
 	
 	public void addExplosion(Explosion x) {
 		explosionArray.add(x);
+	}
+	
+	public ArrayList<String> getrecordScore(){
+		return recordScore;
 	}
 	
 	public ArrayList<Item> getItemArray(){
@@ -101,19 +124,21 @@ public class GameStatus {
 	}
 	public void removeEnemy(int index){
 		enemyArray.remove(index);
+		addScore(20);
 	}
 	public void removeWall(int index){
 		wallArray.remove(index);
-		System.out.print("this wall removed");
+		addScore(30);
 	}
 	public void removeAll(){
-		//player.setLives(3);
+		player = new Player(32,32);
 		bombArray.clear();
 		wallArray.clear();
 		rockArray.clear();
 		itemArray.clear();
 		enemyArray.clear();
 		explosionArray.clear();
+		scoreArray.clear();
 		gameOver = false;
 	}
 	public void InitializeGame(int lvl){
@@ -180,6 +205,7 @@ public class GameStatus {
 	}
 
 	public void setGameOver(boolean gameOver) {
+		recordScore.add(Score);
 		this.gameOver = gameOver;
 	}
 }

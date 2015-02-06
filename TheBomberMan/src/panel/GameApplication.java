@@ -1,5 +1,8 @@
 package panel;
 
+import java.util.Optional;
+
+
 import System.GameStatus;
 import System.GraphicEngine;
 import System.PhysicsManager;
@@ -28,6 +31,7 @@ public  class GameApplication extends Application{
 		mScene = new Scene(mGroup, Window.WIDTH, Window.HEIGHT);		
 		loadEnd();
 		showStage(primaryStage);
+		
 	}
 	
 	protected void loadBefore(){;
@@ -51,7 +55,6 @@ public  class GameApplication extends Application{
 	protected static Pane getRoot(){
 		return mPane;
 	}
-	
 	public void setWindowSize(int width, int height){
 		Window.init(width, height);
 	}

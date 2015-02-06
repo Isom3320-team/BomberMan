@@ -3,15 +3,18 @@ package panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.swing.Timer;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import System.CollisionType;
 import System.GameStatus;
 import System.GraphicEngine;
+import System.MainEngine;
 import System.PhysicsManager;
 import System.Player;
 
@@ -33,7 +36,7 @@ public class InGamePanel extends GraphicPanel  {
 public void drawpanel(GraphicsContext gc) {
 		gc.clearRect(32, 32, 480, 352);
 		game.getPlayer().paint(getGraphicsContext2D());
-
+		
 		for (int i = 0; i < game.getBombArray().size(); i++) {
 			if(!game.getBombArray().get(i).isDead()){
 			game.getBombArray().get(i).paint(gc);
@@ -186,6 +189,19 @@ public void drawpanel(GraphicsContext gc) {
 			
 			}
 		}
+		game.setScore();
+		Collections.sort(game.getrecordScore());
+		gc.fillText("HighScore", 12 , 16);
+		
+		for(int i= game.getrecordScore().size()-1, j =1 ;i>game.getrecordScore().size()-4;i--,j++){
+			
+			gc.fillText(game.getrecordScore().get(i), 12, j*32);
+			
+			}
+		gc.fillText("Score", 100, 16);
+		gc.strokeText(game.getScore(), 160, 16);
+		
+		
 		
 	}
 

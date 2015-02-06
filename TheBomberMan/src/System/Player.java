@@ -24,15 +24,16 @@ public class Player extends LivingObj{
 		maxBomb = 1;
 		blastRadius = 2;
 		level = 1;
-		godmode = false;
-		name = "Default Name ";// to do: prompt the use to input the name;
+		godmode = false; 
 		
 	}
 	
 	public int getLive(){
 		return lives;
 	}
-	
+	public void setPlayerName(String name){
+		this.name = name; 
+	}
 	public void setLives(int lives){
 		this.lives = lives;
 	}
@@ -100,7 +101,7 @@ public class Player extends LivingObj{
 			System.out.print(lives);
 			this.lives--;
 			System.out.print(lives);
-			
+			System.out.print(this.name);
 			if(lives==0){
 			   this.setDead(true);
 		}

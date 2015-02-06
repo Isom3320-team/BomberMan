@@ -25,6 +25,7 @@ import System.Wall;
 public  class  PhysicsManager implements Runnable{
 	static  int inc = 32;
 	static GameStatus game;
+	private Timer timer,timer2;
 	
 	
 	public PhysicsManager(GameStatus game){ 
@@ -56,20 +57,20 @@ public  class  PhysicsManager implements Runnable{
 				}
 
 			};
-			Timer timer = new Timer(100, listener);
+			timer = new Timer(100, listener);
 			timer.start();
 
 			ActionListener listener2 = new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
-					moveEnemies();
-					
+					if (!game.isGameOver()) {
+					   moveEnemies();
+					}
 				}
 
 			};
-			Timer timer2 = new Timer(600, listener2);
+			timer2 = new Timer(600, listener2);
 			timer2.start();
 		
 			}
@@ -388,10 +389,15 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 	/* set
 	 */
 	public void checkGameOver() throws InterruptedException {
+		if (!game.isGameOver()&&!timer2.isRunning()){
+			timer2.start();
+		}
 		if (game.getPlayer().getLive()==0){
 		    game.setGameOver(true);
-		    
-			//MainEngine.scoreCopy();
+		    timer2.stop();
+		    if((Integer.valueOf(game.getScore())!= 0)){
+		    MainEngine.scoreCopy(game.getScore());
+		    }
 		}
 	}	 
 	

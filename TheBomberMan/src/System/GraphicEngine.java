@@ -5,6 +5,7 @@ package System;
 import javafx.application.Application;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import panel.GraphicPanel;
 import panel.GameApplication;
@@ -16,6 +17,8 @@ public class GraphicEngine extends GameApplication implements Runnable {
 	
 	//protected InGamePanel inGamePanel;
 	//protected MainMenuPanel mainMenuPanel;
+	
+	private AudioClip BGM = new AudioClip("Image/bgm.wav");
 	
 	public GraphicEngine(){
 		game = new GameStatus();
@@ -44,6 +47,7 @@ public class GraphicEngine extends GameApplication implements Runnable {
 		getScene().setFill(Color.rgb(128,128,128));
 		*/
 		
+		BGM.play();
 		MainMenuPanel mainMenuPanel = new MainMenuPanel(Window.WIDTH, Window.HEIGHT);
 		getRoot().getChildren().add(mainMenuPanel);
 		getRoot().getChildren().add(mainMenuPanel.getStartButton());

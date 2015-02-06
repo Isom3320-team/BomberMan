@@ -1,7 +1,12 @@
 package System;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javafx.application.Application;
@@ -16,6 +21,7 @@ public class MainEngine extends Application  {
     
 
     public static void main(String[] args){
+    	
     	
     	GraphicEngine ge = new GraphicEngine();
 
@@ -40,15 +46,12 @@ public class MainEngine extends Application  {
    		game.getPlayer().setScore(game.getPlayer().getScore()+500 );
    	}
    	
-	public static void scoreCopy() {
+	public static void scoreCopy(String score) {
 		try {
-			BufferedWriter scoreCopy = new BufferedWriter(new FileWriter(
-					"src/scoreCopy.txt"));
-
+			BufferedWriter scoreCopy = new BufferedWriter(new FileWriter("src/scoreCopy.txt",true));
 			
-			//scoreCopy.write(gs.getPlayer().getScore());
+			scoreCopy.write(score+"\n");
 			
-
 			scoreCopy.close();
 		}
 
@@ -56,6 +59,42 @@ public class MainEngine extends Application  {
 			e.printStackTrace();
 		}
 
+	}
+	public static ArrayList<String> loadScores() {
+		ArrayList<String> loadedScores = new ArrayList<String>();
+
+		try {
+			BufferedWriter init = new BufferedWriter(new FileWriter("src/scoreCopy.txt",true));
+			
+			init.write(0+"\n");
+			
+			init.close();
+			
+			BufferedReader bReader = new BufferedReader(new FileReader(
+					"src/scoreCopy.txt"));
+
+			String currentLine;
+			while (!(currentLine = bReader.readLine()).equals(null)) {
+				loadedScores.add(currentLine);
+			}
+
+			bReader.close();
+
+			return loadedScores;
+
+		} catch (Exception e) {
+			File emptyDummy = new File("src/scoreCopy.txt");
+			try {
+				@SuppressWarnings("unused")
+				boolean fileCreated = emptyDummy.createNewFile();
+			}
+
+			catch (IOException ioe) {
+
+			}
+		}
+
+		return loadedScores;
 	}
 
 	@Override
