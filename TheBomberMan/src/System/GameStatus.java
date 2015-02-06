@@ -1,5 +1,4 @@
 package System;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,8 +12,21 @@ import System.Item;
 import System.Wall;
 import System.Player;
 
+/**
+ * GameStatus is where the memory of the game is created and stored, it also
+ * records the progress of the game 
+ * @author shawn, jin, cyril
+ *
+ */
+
 public class GameStatus {
 	
+	/**
+	 * A GameStatus gives a virtual world of 544*416 pixels.
+	 * It contains a player, some walls, some rocks, some enemies, some bombs,
+	 * some items, some explosions, the score of the game, and an boss.
+	 * A game is finished when the gameOver is set to true.
+	 */
 	int fieldWidth = 544;
 	int fieldHeight = 416;
 	int inc = 32;
@@ -32,7 +44,10 @@ public class GameStatus {
 	private String Score = "0";
 	private boolean gameOver;
 	
-	
+	/**
+	 * Create a GameStatus that puts a player at (32,32) and all other units
+	 * It starts from level 1.
+	 */
 	
 	
 	public GameStatus(){
@@ -49,81 +64,161 @@ public class GameStatus {
 		
 	}
 	
+	/**
+	 * get the player
+	 * @return
+	 */
 	public Player getPlayer(){
 		return player;
 	}
+	/**
+	 * add the score that player has earned
+	 * @param score
+	 */
 	public void addScore(int score){
 		for (int i=0; i<score; i++){
 		   scoreArray.add("+1");
 		}
 	}
-	
+	/**
+	 * set the score of the game
+	 */
 	public void setScore(){
 		Score=String.valueOf(scoreArray.size());
 		
 	}
+	/**
+	 * get the score of the game
+	 * @return
+	 */
 	public String getScore(){
 		return Score;
 	}
 	
+	/**
+	 * add a bomb to the map
+	 */
 	public void addBomb(){
 		bombArray.add(new Bomb(player.getX() ,player.getY()));
 	}
+	
+	/**
+	 * remove the bomb from the map
+	 */
 	
 	public void removeBomb(){
 		if(bombArray.size()!=0){
 		bombArray.remove(0);
 		}
 	}
+	
+	/**
+	 * remove a certain bomb
+	 * @param index
+	 */
 	public void removeBomb(int index){
 		bombArray.remove(index);
 	}
 
+	/**
+	 * remove item form the map
+	 * @param index
+	 */
 	public void removeItem(int index){
 		itemArray.remove(index);
 		addScore(5);
 	}
 	
+	/**
+	 * add explosion to the map
+	 * @param x
+	 */
 	public void addExplosion(Explosion x) {
 		explosionArray.add(x);
 	}
 
+	/**
+	 * get the list of items
+	 * @return
+	 */
 	public ArrayList<Item> getItemArray(){
 		return itemArray;
 	}
 	
+	/**
+	 * get the list of explosions
+	 * @return
+	 */
 	public ArrayList<Explosion> getExplosionArray(){
 		return explosionArray;
 	}
 	
+	/**
+	 * get the list of bombs
+	 * @return
+	 */
 	public ArrayList<Bomb> getBombArray() {
 		return bombArray; 
 	}
 	
+	/**
+	 * get the list of walls
+	 * @return
+	 */
 	public ArrayList<Wall> getWallArray() {
 		return wallArray;
 	}
+	
+	/**
+	 * get the list of rocks
+	 * @return
+	 */
 	public ArrayList<Rock> getRockArray() {
 		return rockArray;
 	}
+	
+	/**
+	 * get the list of bosses
+	 * @return
+	 */
 	public ArrayList<Boss> getBossArray() {
 		return bossArray;
 	}
+	
+	/**
+	 * get the list of enemies
+	 * @return
+	 */
 	public ArrayList<Enemy> getEnemyArray() {
 		return enemyArray;
 	}
 	
+	/**
+	 * remove an explosion from the map
+	 * @param index
+	 */
 	public void removeExplosion(int index){
 		explosionArray.remove(index);
 	}
+	/**
+	 * remove an enemy from the map
+	 * @param index
+	 */
 	public void removeEnemy(int index){
 		enemyArray.remove(index);
 		addScore(20);
 	}
+	/**
+	 * remove an wall from the map
+	 * @param index
+	 */
 	public void removeWall(int index){
 		wallArray.remove(index);
 		addScore(30);
 	}
+	/**
+	 * remove everything from the map
+	 */
 	public void removeAll(){
 		player = new Player(32,32);
 		bombArray.clear();
@@ -135,6 +230,10 @@ public class GameStatus {
 		scoreArray.clear();
 		gameOver = false;
 	}
+	/**
+	 * initilize the game, set the number of each units according to the levels
+	 * @param lvl
+	 */
 	public void InitializeGame(int lvl){
 		bombArray = new ArrayList<Bomb>();
 		wallArray = new ArrayList<Wall>();
@@ -193,11 +292,19 @@ public class GameStatus {
 			}
 		}
 		
+		
+	/**
+	 * check if the game is over
+	 */
 	}
 	public boolean isGameOver() {
 		return gameOver;
 	}
 
+	/**
+	 * make the game over
+	 * @param gameOver
+	 */
 	public void setGameOver(boolean gameOver) {
 		MainEngine.addToRecord(Integer.valueOf(Score));
 		this.gameOver = gameOver;

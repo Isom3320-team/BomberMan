@@ -1,5 +1,4 @@
 package System;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,17 +20,30 @@ import System.Player;
 import System.Item;
 import System.Wall;
 
+/**
+ * The physics manager checks collision and move the enemies
+ * @author shawn, jin, cyril
+ *
+ */
 public  class  PhysicsManager implements Runnable{
+	/**
+	 * A physics manager contains a game status, a timer
+	 */
 	static  int inc = 32;
 	static GameStatus game;
 	private Timer timer,timer2;
 	
-	
+	/**
+	 * create a physics manager
+	 * @param game
+	 */
 	public PhysicsManager(GameStatus game){ 
 		this.game = game;
 	}
 	
-	
+	/**
+	 * start the physics manager
+	 */
 		@Override
 	public void run() {
 
@@ -74,7 +86,14 @@ public  class  PhysicsManager implements Runnable{
 		
 			}
 		
-public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType type) {
+		/**
+		 * check the collision between two units
+		 * @param unit1
+		 * @param unit2
+		 * @param type
+		 * @return
+		 */
+		public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType type) {
 			
 			if (type == CollisionType.UP) {
 				if (unit1.getX() == unit2.getX() && unit2.getY() == (unit1.getY() - inc)){
@@ -109,8 +128,13 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			return false;
 		}
 
-		
-	public static boolean canMove(Units unit1, CollisionType type) {
+		/**
+		 * see if a unit can move
+		 * @param unit1
+		 * @param type
+		 * @return
+		 */
+		public static boolean canMove(Units unit1, CollisionType type) {
 
 			if (!(unit1 instanceof Explosion)&&!(unit1 instanceof FlyMinion)){
 			for(int i=0; i < game.getWallArray().size(); i++) {
@@ -140,11 +164,16 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 					return false;
 				}
 			}
-		}	
-		return true;
+			}	
+			return true;
 		
-	}
-		//Both for Boss and Players
+		}
+		
+		/**
+		 * see if player can place bomb
+		 * @param unit1
+		 * @return
+		 */
 	public boolean canPlaceBomb(Units unit1) {
 			 
 		 
@@ -175,7 +204,13 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		return true;
 		} 
 		 
-	public boolean hitsEnemy(Units unit1,CollisionType type) {
+	/**
+	 * see it player hit enemy
+	 * @param unit1
+	 * @param type
+	 * @return
+	 */
+		public boolean hitsEnemy(Units unit1,CollisionType type) {
 				for (int i = 0; i < game.getEnemyArray().size(); i++) {
 					if (CollisionDetector(unit1, game.getEnemyArray().get(i),type)) {
 						return true;
@@ -183,6 +218,11 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				}
 				return false;
 			}
+		/**
+		 * see if enemy or explosion hits player
+		 * @param enemy
+		 * @return
+		 */
 	public boolean hitsPlayer(Enemy enemy) {
 
 		if (CollisionDetector(enemy, game.getPlayer(), CollisionType.OVERLAP)) {
@@ -191,6 +231,9 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 		return false;
 	}
+	/**
+	 * see if player consume the item
+	 */
 	public void itemPickUp() {
 		for (int i = 0; i < game.getItemArray().size(); i++) {
 			if (CollisionDetector(game.getPlayer(), game.getItemArray().get(i),
@@ -201,6 +244,9 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		}
 	}
+	/**
+	 * see if the explosion has kill anything
+	 */
 	public void explosionDetector() {
 		try{for (int i = 0; i < game.getExplosionArray().size(); i++) {
 			for (int j = 0; j < game.getWallArray().size(); j++) {
@@ -232,6 +278,10 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * algorithm to let the enemy walk
+	 * @param en
+	 */
 	public void enemyRandomWalk(Enemy en) {
 		
 		ArrayList<CollisionType> options = new ArrayList<CollisionType>();
@@ -266,6 +316,9 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 			}
 		}
 	}
+	/**
+	 * let the enemy walk
+	 */
 	public void moveEnemies() {
 
 			for (int i = 0; i < game.getEnemyArray().size(); i++) {
@@ -275,7 +328,11 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 				}
 			}
 	}
-
+	
+	/**
+	 * explode the bomb
+	 * @param bombX
+	 */
 	public void explodeBomb(int bombX) {
 
 				boolean canExpUp = true;
@@ -341,7 +398,9 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 
 				game.removeBomb(bombX);
 			}
-	
+	/**
+	 * remove dead things from game status
+	 */
 	public void removeCorpse() {
 		for (int i = 0; i < game.getBombArray().size(); i++) {
 			if (game.getBombArray().get(i).isDead()) {
@@ -368,13 +427,18 @@ public static boolean CollisionDetector(Units unit1, Units unit2, CollisionType 
 		}
 
 	}
-
+	/**
+	 * win will upgrade the game to next level
+	 */
 	public void winning() {
 		if (game.getEnemyArray().isEmpty()) {
 			MainEngine.levelUp(game);
 		}
 	}
-
+	/**
+	 * check if the player has lost
+	 * @throws InterruptedException
+	 */
 	public void checkGameOver() throws InterruptedException {
 		if (!game.isGameOver()&&!timer2.isRunning()){
 			timer2.start();

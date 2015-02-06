@@ -5,16 +5,31 @@ import java.util.TimerTask;
 import System.Item.ItemType;
 import javafx.scene.image.Image;
 
+/**
+ * A player is where we play!
+ * @author shawn, jin, cyril
+ *
+ */
 public class Player extends LivingObj{
+	/**
+	 * A player has level, lives, certain number of bombs, bomb has radius
+	 * 
+	 */
 	private int  level, lives,maxBomb, blastRadius; //What are these unused variables?
 	private boolean godmode; 
-	private String name;
 
-	
+	/**
+	 * create a player at (0,0) on the canvas
+	 */
 	public Player(){
 		super(0, 0);
 	}
 	
+	/**
+	 * create a player at (x,y) on the canvs
+	 * @param x
+	 * @param y
+	 */
 	public Player(int x, int y) {
 		super(x, y);
 		
@@ -28,32 +43,58 @@ public class Player extends LivingObj{
 		
 	}
 	
+	/**
+	 * get the lives of player
+	 * @return
+	 */
 	public int getLive(){
 		return lives;
 	}
-	public void setPlayerName(String name){
-		this.name = name; 
-	}
+
+	/**
+	 * set the lives of player
+	 * @param lives
+	 */
 	public void setLives(int lives){
 		this.lives = lives;
 	}
 	
+	/**
+	 * get max bombs
+	 * @return
+	 */
 	public int getMaxBomb(){
 		return maxBomb;
 	}
 	
+	/**
+	 * set max bombs
+	 * @param maxBomb
+	 */
 	public void setMaxBomb(int maxBomb){
 		this.maxBomb = maxBomb;
 	}
 	
+	/**
+	 * get bomb radius
+	 * @return
+	 */
 	public int getBombRadius(){
 		return blastRadius;
 	}
 	
+	/**
+	 * set bomb radius
+	 * @param br
+	 */
 	public void setBombRadius(int br){
 		this.blastRadius = br;
 	}
 	
+	/**
+	 * eat the itme
+	 * @param item
+	 */
 	
 	public void consume(Item item){
 		
@@ -64,16 +105,30 @@ public class Player extends LivingObj{
 		}
 	}
 	
+	/**
+	 * get the level
+	 * @return
+	 */
 	public int getLevel(){
 		return level;
 	}
+	/**
+	 * set the level
+	 * @param level
+	 */
 	public void setLevel(int level){
 		this.level = level;
 	}
+	/**
+	 * level up the player
+	 */
 	public void levelUp(){
 		this.level += 1;
 	}
 	
+	/**
+	 * kill the player
+	 */
 	@Override
 	public void die() {
 		if (!godmode) {
